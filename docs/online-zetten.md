@@ -4,9 +4,9 @@ Aldus draait op de Hetzner-server, net als liveaux: in een eigen Docker-containe
 
 | Website | Domein | Interne poort | Map op de server | Repository |
 | --- | --- | --- | --- | --- |
-| alduslab | alduslab.eu, www.alduslab.eu | 8002 | ~/aldus | github.com/pieterrgrt/aldus |
+| alduslab | alduslab.eu, www.alduslab.eu | 8003 | ~/aldus | github.com/pieterrgrt/aldus |
 
-Neem deze rij over in de tabel van *Website live zetten op Hetzner*. De volgende site krijgt dan 8003.
+Neem deze rij over in de tabel van *Website live zetten op Hetzner*. De volgende site krijgt dan 8004. In gebruik op 28 september 2026: 8001 (liveaux), 8002 (onbekend, zie `docker ps`), 8003 (Aldus), 11000 (Nextcloud).
 
 `cloud.alduslab.eu` (Nextcloud), `vault.alduslab.eu` en de Proton-mail blijven zoals ze zijn. Dit plan raakt alleen `alduslab.eu` en `www`.
 
@@ -22,7 +22,7 @@ Stap 1 gebeurt op GitHub, stap 2 en 3 bij Infomaniak en GitHub, de rest op de se
    sudo ss -tlnp | grep 127.0.0.1
    ```
 
-   Staat `127.0.0.1:8002` er al tussen, kies dan een vrije poort. Pas die aan in `docker-compose.yml` en in stap 7.
+   Staat `127.0.0.1:8003` er al tussen, kies dan een vrije poort. Pas die aan in `docker-compose.yml` en in stap 7.
 
 3. **DNS bij Infomaniak omzetten.** Nu wijst het domein naar GitHub Pages. Dat moet de Hetzner-server worden.
 
@@ -63,13 +63,13 @@ Stap 1 gebeurt op GitHub, stap 2 en 3 bij Infomaniak en GitHub, de rest op de se
 
    ```bash
    docker compose up -d --build
-   curl -I http://127.0.0.1:8002/
+   curl -I http://127.0.0.1:8003/
    ```
 
    `HTTP/1.1 200 OK` = goed. De eerste keer duurt het bouwen een paar minuten. Test ook de doorverwijzing van www:
 
    ```bash
-   curl -I -H "Host: www.alduslab.eu" http://127.0.0.1:8002/
+   curl -I -H "Host: www.alduslab.eu" http://127.0.0.1:8003/
    ```
 
    Een 301 naar `https://alduslab.eu/` = goed.
@@ -81,7 +81,7 @@ Stap 1 gebeurt op GitHub, stap 2 en 3 bij Infomaniak en GitHub, de rest op de se
        listen 80;
        server_name alduslab.eu www.alduslab.eu;
        location / {
-           proxy_pass http://127.0.0.1:8002;
+           proxy_pass http://127.0.0.1:8003;
            proxy_set_header Host $host;
            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
            proxy_set_header X-Forwarded-Proto $scheme;
