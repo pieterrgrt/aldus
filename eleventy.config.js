@@ -14,9 +14,6 @@ export default function (eleventyConfig) {
     [`${fontDir}/source-serif-4-latin-opsz-normal.woff2`]: "fonts/source-serif-4-normal.woff2",
     [`${fontDir}/source-serif-4-latin-opsz-italic.woff2`]: "fonts/source-serif-4-italic.woff2",
   });
-  eleventyConfig.addPassthroughCopy({
-    "node_modules/@fontsource-variable/montserrat/files/montserrat-latin-wght-normal.woff2": "fonts/montserrat-normal.woff2",
-  });
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/merk");
   eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg", "src/favicon-32.png": "favicon-32.png", "src/apple-touch-icon.png": "apple-touch-icon.png" });

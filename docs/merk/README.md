@@ -8,6 +8,6 @@ De SVG's in `src/merk/` zijn daaruit nagetrokken: geen lettertype, maar de vorme
 - De letters staan bewust niet op één lijn: de **l** zweeft boven de basislijn van de **A**.
 - Kleur: `#0d3793` (gemeten). Rand: `#e5e5e5`, 1,5 eenheid.
 
-Het lettertype van het origineel is niet vast te stellen. Voor de uitgeschreven merknaam gebruikt de site Montserrat ExtraBold. Die lijkt het meest: een platte top op de A en een brede stand.
+Het origineel is gezet in Helvetica (vet). De site gebruikt Helvetica ook voor de uitgeschreven merknaam en de koppen. De A in de afbeelding is breder dan de gewone Helvetica Bold; mogelijk is die horizontaal opgerekt.
 
 Heb je het originele ontwerpbestand of lettertype nog, vervang de SVG's dan door een export daarvan.

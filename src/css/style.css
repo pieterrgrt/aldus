@@ -1,19 +1,12 @@
 /*
   Aldus — huisstijl
-  Afgeleid van het beeldmerk: Aldus-blauw (#0d3793) op wit, zware geometrische schreefloze letter.
-  - Montserrat (variabel) voor merknaam, koppen en interface.
+  Afgeleid van het beeldmerk: Aldus-blauw (#0d3793) op wit, vette Helvetica.
+  - Helvetica (systeemletter, niet meegeleverd) voor merknaam, koppen en interface.
   - Source Serif 4 (variabel, optische maten) voor lopende tekst.
   Tekstmaat ~65 tekens, regelafstand 1,6, verticale ritme in hele regels (--ruimte).
   Alle waarden staan ook in het designsysteem (tokens.json).
 */
 
-@font-face {
-  font-family: "Montserrat Variable";
-  src: url("/fonts/montserrat-normal.woff2") format("woff2");
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
 @font-face {
   font-family: "Source Serif 4";
   src: url("/fonts/source-serif-4-normal.woff2") format("woff2");
@@ -42,7 +35,7 @@
   --lijn: #e5e5e5;         /* dezelfde grijze rand als rond het beeldmerk */
 
   /* Letter */
-  --sans: "Montserrat Variable", Montserrat, "Helvetica Neue", Arial, sans-serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --serif: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 
   /* Maten */
@@ -112,7 +105,7 @@ body {
   gap: 0.6rem;
   text-decoration: none;
   color: var(--blauw);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.3rem;
   letter-spacing: -0.02em;
 }
@@ -150,7 +143,7 @@ h1, h2, h3 {
 }
 h1 {
   font-size: clamp(2rem, 1.4rem + 2.4vw, 2.9rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.025em;
   color: var(--blauw);
   margin: 0 0 calc(var(--ruimte) * 0.5);

@@ -52,7 +52,7 @@ Afgeleid van het beeldmerk (zie `docs/merk/`).
 
 - **Beeldmerk:** `src/merk/aldus-beeldmerk.svg` (wit rondje, blauwe letters) en `aldus-beeldmerk-rand.svg` (met de grijze rand, voor op wit). Ook favicon en app-icoon.
 - **Kleur:** Aldus-blauw `#0d3793` op wit. Tekst `#161a26`, gedempt `#555c70`, lijnen `#e5e5e5`. Donkere modus volgt de systeeminstelling.
-- **Letters:** Montserrat (zwaar, 700–800) voor merknaam, koppen en interface; Source Serif 4 voor lopende tekst. Beide zelf gehost vanuit npm-pakketten.
+- **Letters:** Helvetica (vet) voor merknaam, koppen en interface, net als het logo. Source Serif 4 voor lopende tekst, zelf gehost vanuit een npm-pakket. Helvetica is een licentieletter en wordt niet meegeleverd: Apple-apparaten tonen de echte Helvetica, Windows en Android vallen terug op Arial.
 - **Maat:** ca. 65 tekens per regel, tekst 18–21 px, regelafstand 1,6. Verticale afstanden zijn veelvouden van één regel (`--ruimte`).
 
 Alles staat als variabelen bovenaan `src/css/style.css`.
