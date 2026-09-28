@@ -42,7 +42,7 @@ src/
   stukken/*.md            de artikelen
   index.njk               homepage
   stukken.njk             overzicht van alle stukken
-docs/domein.md            keuze hoofddomein
+docs/domein.md            domein en DNS
 eleventy.config.js        Eleventy-instellingen
 ```
 
