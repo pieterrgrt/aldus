@@ -4,7 +4,8 @@
   "description": "Aldus — een leessite, gebouwd met Eleventy",
   "scripts": {
     "start": "eleventy --serve",
-    "build": "eleventy"
+    "build": "eleventy && pagefind --site _site",
+    "zoekindex": "pagefind --site _site"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,8 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.6",
     "@fontsource-variable/source-serif-4": "^5.3.0",
-    "markdown-it-footnote": "^4.0.0"
+    "markdown-it-footnote": "^4.0.0",
+    "pagefind": "^1.5.2"
   },
   "private": true,
   "type": "module"

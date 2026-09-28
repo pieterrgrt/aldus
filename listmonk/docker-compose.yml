@@ -1,0 +1,45 @@
+# Listmonk: de nieuwsbrief van Aldus, op nieuwsbrief.alduslab.eu.
+# Draait los van de site, naast Nextcloud en Vaultwarden. Zie docs/nieuwsbrief.md.
+# Starten: cp .env.voorbeeld .env, invullen, dan docker compose up -d
+services:
+  app:
+    image: listmonk/listmonk:v6.2.0
+    restart: unless-stopped
+    # Alleen bereikbaar op de server zelf; de nginx van de server stuurt nieuwsbrief.alduslab.eu hierheen.
+    ports:
+      - "127.0.0.1:8004:9000"
+    depends_on:
+      db:
+        condition: service_healthy
+    # Bij de eerste start de database inrichten, bij een nieuwe versie bijwerken, dan draaien.
+    # --config '' zorgt dat alle instellingen uit de omgeving hieronder komen.
+    command: [sh, -c, "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config '' && ./listmonk --config ''"]
+    environment:
+      LISTMONK_app__address: 0.0.0.0:9000
+      LISTMONK_db__host: db
+      LISTMONK_db__port: 5432
+      LISTMONK_db__user: listmonk
+      LISTMONK_db__password: ${DB_WACHTWOORD:?zet DB_WACHTWOORD in .env}
+      LISTMONK_db__database: listmonk
+      LISTMONK_db__ssl_mode: disable
+      TZ: Europe/Amsterdam
+      # Alleen gebruikt bij de allereerste start: maakt de beheerder aan.
+      LISTMONK_ADMIN_USER: ${BEHEERDER:-}
+      LISTMONK_ADMIN_PASSWORD: ${BEHEERDER_WACHTWOORD:-}
+    volumes:
+      - ./uploads:/listmonk/uploads
+
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: listmonk
+      POSTGRES_PASSWORD: ${DB_WACHTWOORD:?zet DB_WACHTWOORD in .env}
+      POSTGRES_DB: listmonk
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U listmonk"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    volumes:
+      - ./data:/var/lib/postgresql/data

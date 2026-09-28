@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="artikel">
+<article class="artikel" data-pagefind-body>
   <header>
     <h1>{{ title }}</h1>
     {% if samenvatting %}<p class="lead">{{ samenvatting }}</p>{% endif %}
@@ -14,4 +14,5 @@ layout: layouts/base.njk
     {{ content | safe }}
   </div>
 </article>
+{% include "partials/aanmelden.njk" %}
 <nav class="terug"><a href="/stukken/">← Alle stukken</a></nav>

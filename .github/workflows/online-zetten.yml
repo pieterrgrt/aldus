@@ -1,0 +1,53 @@
+# Elke push naar main zet de site automatisch online op de Hetzner-server.
+# Eerst wordt hier gecontroleerd of de site bouwt; pas dan gaat de server aan de slag.
+# Instellen: docs/online-zetten.md, onder "Automatisch online zetten".
+name: Online zetten
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Nooit twee tegelijk; een nieuwe push wacht tot de vorige klaar is.
+concurrency:
+  group: online-zetten
+  cancel-in-progress: false
+
+jobs:
+  bouwen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+  online:
+    needs: bouwen
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH klaarzetten
+        env:
+          SLEUTEL: ${{ secrets.DEPLOY_SSH_KEY }}
+          BEKENDE_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SLEUTEL" > ~/.ssh/deploy
+          chmod 600 ~/.ssh/deploy
+          printf '%s\n' "$BEKENDE_HOSTS" > ~/.ssh/known_hosts
+
+      # De sleutel mag op de server alleen deploy/update.sh draaien (zie authorized_keys),
+      # dus er hoeft hier geen opdracht mee.
+      - name: Nieuwe versie bouwen op de server
+        env:
+          SERVER: ${{ secrets.DEPLOY_HOST }}
+        run: ssh -T -i ~/.ssh/deploy -o BatchMode=yes "root@$SERVER"
+
+      - name: Controleren of de site antwoordt
+        run: curl --fail --silent --show-error --retry 5 --retry-delay 5 --retry-all-errors -o /dev/null https://alduslab.eu/

@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+title: Nieuwsbrief
+onderdeel: nieuwsbrief
+permalink: /nieuwsbrief/
+---
+<section class="intro">
+  <h1>Nieuwsbrief</h1>
+  <p class="lead">{{ nieuwsbrief.tekst }}</p>
+</section>
+{% set zonderTekst = true %}
+{% include "partials/aanmelden.njk" %}
+<p class="meta">De nieuwsbrief wordt verstuurd vanaf een eigen server in Europa, met <a href="https://listmonk.app">Listmonk</a>. Je adres wordt nergens anders voor gebruikt. Eerdere nummers staan in het <a href="{{ nieuwsbrief.url }}/archive">archief</a>.</p>
