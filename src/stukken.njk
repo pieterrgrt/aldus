@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+title: Alle stukken
+permalink: /stukken/
+---
+<h1>Alle stukken</h1>
+{% for jaar, stukken in collections.stukken | perJaar %}
+<section aria-labelledby="jaar-{{ jaar }}">
+  <h2 id="jaar-{{ jaar }}" class="sectiekop">{{ jaar }}</h2>
+  <ol class="lijst lijst--compact">
+  {% for stuk in stukken %}
+    <li>
+      <a href="{{ stuk.url }}">{{ stuk.data.title }}</a>
+      <time datetime="{{ stuk.date | isoDatum }}">{{ stuk.date | datum }}</time>
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+{% endfor %}
