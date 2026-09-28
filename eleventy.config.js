@@ -21,6 +21,19 @@ export default function (eleventyConfig) {
 
   eleventyConfig.amendLibrary("md", (md) => md.use(markdownItFootnote));
 
+  // Concepten zie je tijdens `npm start`, maar ze komen niet op de echte site (`npm run build`).
+  // Het consultancy-gedeelte blijft offline tot `klaar: true` in src/_data/consultancy.js.
+  eleventyConfig.addPreprocessor("concepten", "*", (data) => {
+    if (process.env.ELEVENTY_RUN_MODE !== "build") return;
+    if (data.concept) return false;
+    if (data.onderdeel === "consultancy" && !data.consultancy.klaar) return false;
+  });
+
+  // Consultancyprojecten, nieuwste eerst.
+  eleventyConfig.addCollection("projecten", (api) =>
+    api.getFilteredByGlob("src/consultancy/*.md").sort((a, b) => b.date - a.date)
+  );
+
   // Alle stukken, nieuwste eerst.
   eleventyConfig.addCollection("stukken", (api) =>
     api.getFilteredByGlob("src/stukken/*.md").sort((a, b) => b.date - a.date)

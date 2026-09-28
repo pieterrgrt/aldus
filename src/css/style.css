@@ -115,6 +115,7 @@ body {
   border-radius: 50%;
   box-shadow: 0 0 0 1px var(--lijn);
 }
+.kop nav { display: flex; gap: 1.25rem; }
 .kop nav a {
   color: var(--inkt-zacht);
   text-decoration: none;
@@ -152,6 +153,7 @@ h2 { font-size: 1.3rem; font-weight: 700; margin: calc(var(--ruimte) * 2) 0 calc
 h3 { font-size: 1.05rem; font-weight: 700; margin: calc(var(--ruimte) * 1.5) 0 calc(var(--ruimte) * 0.25); }
 
 .sectiekop {
+  font-family: var(--sans);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -253,6 +255,38 @@ hr.footnotes-sep::after { content: none; }
 .terug { margin-top: calc(var(--ruimte) * 2); font-family: var(--sans); font-size: 0.8rem; font-weight: 600; }
 .terug a { text-decoration: none; color: var(--inkt-zacht); }
 .terug a:hover { color: var(--blauw); }
+
+/* Consultancy */
+.projectregel { font-family: var(--sans); font-size: 0.8rem; font-weight: 600; color: var(--inkt-zacht); margin: 0.3em 0 0; }
+.label {
+  display: inline-block;
+  vertical-align: 0.2em;
+  margin-left: 0.4rem;
+  padding: 0.1em 0.45em;
+  font-family: var(--sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blauw);
+  border: 1px solid var(--blauw);
+  border-radius: 3px;
+}
+.project .sectiekop { margin-bottom: calc(var(--ruimte) * 0.5); }
+.project .sectiekop a { color: inherit; text-decoration: none; }
+.feiten {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: calc(var(--ruimte) * 0.5) 1.5rem;
+  margin: var(--ruimte) 0 0;
+  padding-top: var(--ruimte);
+  border-top: 1px solid var(--lijn);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+.feiten dt { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--inkt-zacht); margin-bottom: 0.2rem; }
+.feiten dd { margin: 0; font-weight: 600; }
 
 @media (max-width: 30rem) {
   .lijst--compact li { display: block; }

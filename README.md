@@ -32,6 +32,31 @@ citaten met `>`, en voetnoten.[^1]
 De bestandsnaam wordt het adres: `mijn-stuk.md` → `/stukken/mijn-stuk/`.
 Het stuk verschijnt vanzelf op de homepage (vijf nieuwste) en in *Alle stukken* (per jaar).
 
+## Consultancy en portfolio
+
+Het consultancy-gedeelte staat op `/consultancy/`: een korte introductie en je projecten. Elk project is een Markdown-bestand in `src/consultancy/`:
+
+```markdown
+---
+title: Titel van het project
+opdrachtgever: Naam van de opdrachtgever
+periode: 2025–2026
+rol: Adviseur
+diensten:
+  - Strategie
+  - Onderzoek
+samenvatting: Eén zin over de vraag en wat je opleverde.
+date: 2026-03-01
+---
+
+## De vraag
+…
+```
+
+`date` bepaalt de volgorde (nieuwste bovenaan). De introductie en je contactgegevens staan in `src/_data/consultancy.js`.
+
+**Concepten.** Zet `concept: true` bovenaan een stuk of project. Dan zie je het wel tijdens `npm start` (met het label *Concept*), maar komt het niet op de echte site. Het hele consultancy-gedeelte staat nog uit: pas als je in `src/_data/consultancy.js` `klaar: true` zet, verschijnt het op alduslab.eu, inclusief de link in de kop.
+
 ## Indeling
 
 ```
@@ -40,6 +65,8 @@ src/
   _includes/layouts/      base.njk (elke pagina), artikel.njk (een stuk)
   css/style.css           alle typografie en kleuren
   stukken/*.md            de artikelen
+  consultancy/*.md        de projecten
+  _data/consultancy.js    introductie, contact, aan/uit
   index.njk               homepage
   stukken.njk             overzicht van alle stukken
 docs/domein.md            domein en DNS
