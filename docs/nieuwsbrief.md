@@ -32,7 +32,7 @@ Op de server (`ssh root@178.105.62.224`):
    nano .env        # DB_WACHTWOORD: openssl rand -hex 24; BEHEERDER_WACHTWOORD: uit Vaultwarden
    docker compose up -d
    docker compose logs -f app   # wacht op "http server started", dan Ctrl+C
-   curl -I http://127.0.0.1:8004/admin/
+   curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:8004/admin   # 200 of 302 = goed (niet curl -I: Listmonk kent geen HEAD)
    ```
 
 4. **nginx.** Maak `/etc/nginx/sites-available/nieuwsbrief`:
