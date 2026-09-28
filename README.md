@@ -46,11 +46,13 @@ docs/domein.md            domein en DNS
 eleventy.config.js        Eleventy-instellingen
 ```
 
-## Typografie
+## Huisstijl
 
-- **Letter:** Source Serif 4 (variabel, met optische maten), zelf gehost vanuit het npm-pakket — geen Google Fonts of andere externe verzoeken.
-- **Maat:** ca. 65 tekens per regel, tekst 18–21 px afhankelijk van het scherm, regelafstand 1,6.
-- **Kleur:** warm papier (`#fbf8f2`), bijna-zwarte inkt (`#1e1c1a`), één accent in rubriceerrood (`#a3281c`). Donkere modus volgt de instelling van het systeem.
-- **Witruimte:** alle verticale afstanden zijn veelvouden van één regel (`--ruimte`).
+Afgeleid van het beeldmerk (zie `docs/merk/`).
+
+- **Beeldmerk:** `src/merk/aldus-beeldmerk.svg` (wit rondje, blauwe letters) en `aldus-beeldmerk-rand.svg` (met de grijze rand, voor op wit). Ook favicon en app-icoon.
+- **Kleur:** Aldus-blauw `#0d3793` op wit. Tekst `#161a26`, gedempt `#555c70`, lijnen `#e5e5e5`. Donkere modus volgt de systeeminstelling.
+- **Letters:** Helvetica (vet) voor merknaam, koppen en interface, net als het logo. Source Serif 4 voor lopende tekst, zelf gehost vanuit een npm-pakket. Helvetica is een licentieletter en wordt niet meegeleverd: Apple-apparaten tonen de echte Helvetica, Windows en Android vallen terug op Arial.
+- **Maat:** ca. 65 tekens per regel, tekst 18–21 px, regelafstand 1,6. Verticale afstanden zijn veelvouden van één regel (`--ruimte`).
 
 Alles staat als variabelen bovenaan `src/css/style.css`.

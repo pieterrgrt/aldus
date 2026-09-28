@@ -15,6 +15,8 @@ export default function (eleventyConfig) {
     [`${fontDir}/source-serif-4-latin-opsz-italic.woff2`]: "fonts/source-serif-4-italic.woff2",
   });
   eleventyConfig.addPassthroughCopy("src/css");
+  eleventyConfig.addPassthroughCopy("src/merk");
+  eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg", "src/favicon-32.png": "favicon-32.png", "src/apple-touch-icon.png": "apple-touch-icon.png" });
   eleventyConfig.addWatchTarget("src/css/");
 
   eleventyConfig.amendLibrary("md", (md) => md.use(markdownItFootnote));

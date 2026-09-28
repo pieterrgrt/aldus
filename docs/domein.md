@@ -4,14 +4,14 @@
 
 ## DNS
 
-Welke records je nodig hebt, hangt af van waar de site gehost wordt. Dat is nog niet gekozen.
-Zet dus nog **geen** A-records totdat de hosting er is. Een A-record dat naar niets wijst levert alleen foutmeldingen op.
+De site staat op **GitHub Pages**. De DNS wordt beheerd bij **Infomaniak** (nameservers `nsany1/nsany2.infomaniak.com`).
+Publiceren gaat automatisch via `.github/workflows/pages.yml` bij elke push naar `main`.
 
-Records voor e-mail (MX, SPF/TXT, DKIM) laat je altijd staan zoals ze zijn.
+Records voor e-mail (Proton: MX, SPF, DKIM, DMARC, `protonmail-verification`) en de subdomeinen `cloud` en `vault` laat je staan zoals ze zijn.
 
-### Als het GitHub Pages wordt
+### GitHub Pages instellen
 
-De code staat al op GitHub, dus dit is de eenvoudigste weg. Doe het in deze volgorde:
+In deze volgorde:
 
 1. **Domein verifiëren** bij GitHub, zodat niemand anders het kan claimen:
    GitHub → Settings (je account) → Pages → *Add a domain* → `alduslab.eu`.
@@ -38,7 +38,7 @@ De code staat al op GitHub, dus dit is de eenvoudigste weg. Doe het in deze volg
    `@` staat voor het domein zelf (`alduslab.eu`). Sommige registrars willen dat veld leeg.
    Staan er al A-, AAAA- of CNAME-records voor `@` of `www`, bijvoorbeeld een parkeerpagina van de registrar? Verwijder die dan eerst.
 
-3. **Custom domain instellen** in de repository: Settings → Pages → *Custom domain* → `alduslab.eu`. Zet *Enforce HTTPS* aan zodra GitHub het certificaat heeft aangemaakt. Dat kan tot een uur duren.
+3. **Pages instellen** in de repository: Settings → Pages → *Source*: **GitHub Actions**. Daarna bij *Custom domain* → `alduslab.eu`. Zet *Enforce HTTPS* aan zodra GitHub het certificaat heeft aangemaakt. Dat kan tot een uur duren.
 
 4. **Controleren**, als DNS is bijgewerkt (minuten tot een paar uur):
 
