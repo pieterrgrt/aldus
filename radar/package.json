@@ -1,0 +1,12 @@
+{
+  "name": "aldus-radar",
+  "private": true,
+  "type": "module",
+  "description": "Regelgevingsradar: weekoverzicht uit Miniflux, samengevat met de Claude-API",
+  "scripts": {
+    "radar": "node radar.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0"
+  }
+}

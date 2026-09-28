@@ -1,0 +1,9 @@
+{% if consultancy.contact.email %}
+<section class="contact" id="contact" aria-labelledby="contact-kop">
+  <h2 id="contact-kop" class="sectiekop">Contact</h2>
+  <p>{{ consultancy.contact.tekst }}</p>
+  <p><a class="knop" href="mailto:{{ consultancy.contact.email }}?subject={{ consultancy.contact.onderwerp | urlencode }}">{{ consultancy.contact.email }}</a></p>
+</section>
+{% elif eleventy.env.runMode != "build" %}
+<p class="meta"><span class="label">Concept</span> Vul <code>contact.email</code> in bij <code>src/_data/consultancy.js</code>; dan verschijnt hier het contactblok.</p>
+{% endif %}

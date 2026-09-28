@@ -1,0 +1,24 @@
+---
+layout: layouts/base.njk
+title: Zoeken
+permalink: /zoeken/
+---
+<h1>Zoeken</h1>
+<p class="lead">Door alle stukken heen, op woord of zinsdeel.</p>
+<div class="zoeken" id="zoeken"></div>
+<noscript><p>Zoeken werkt met JavaScript. Zonder kun je bladeren in <a href="/stukken/">alle stukken</a>.</p></noscript>
+{#- De zoekindex en de zoekbalk maakt Pagefind na het bouwen (npm run build) in _site/pagefind/. -#}
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (!window.PagefindUI) {
+      document.getElementById("zoeken").innerHTML =
+        '<p class="meta">De zoekindex ontbreekt. Die ontstaat bij <code>npm run build</code>, niet bij <code>npm start</code>.</p>';
+      return;
+    }
+    const ui = new PagefindUI({ element: "#zoeken", showSubResults: true, showImages: false, resetStyles: false });
+    const q = new URLSearchParams(location.search).get("q");
+    if (q) ui.triggerSearch(q);
+  });
+</script>

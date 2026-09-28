@@ -14,7 +14,17 @@ npm run build    # bouwt de site naar _site/
 
 ## Online
 
-De site draait op de Hetzner-server als Docker-container. Een nieuwe versie zet je live met `./deploy/update.sh` op de server; zie `docs/online-zetten.md`.
+De site draait op de Hetzner-server als Docker-container. Een push naar `main` is genoeg: GitHub Actions bouwt de site ter controle en zet hem dan op de server online. Met de hand kan ook, met `./deploy/update.sh` op de server. Zie `docs/online-zetten.md`.
+
+## Zoeken
+
+`/zoeken/` doorzoekt alle stukken met [Pagefind](https://pagefind.app). De zoekindex ontstaat bij `npm run build` (na Eleventy) en komt in `_site/pagefind/`. Tijdens `npm start` is er geen index; wil je zoeken lokaal proberen, draai dan `npm run build` en daarna `npx pagefind --site _site --serve`.
+
+## Nieuwsbrief
+
+De nieuwsbrief gaat via Listmonk op nieuwsbrief.alduslab.eu, naast Nextcloud en Vaultwarden op de server. Het aanmeldformulier staat onder elk stuk, op de homepage en op `/nieuwsbrief/`; het verschijnt pas op de echte site als de lijst-UUID in `src/_data/nieuwsbrief.js` staat. Installatie, overstap van Substack en beheer: `docs/nieuwsbrief.md`.
+
+Elke week kan `radar/` een regelgevingsradar maken uit je Miniflux-feeds, met de Claude-API, als startpunt voor de nieuwsbrief: `docs/radar.md`.
 
 ## Een stuk schrijven
 
@@ -38,7 +48,7 @@ Het stuk verschijnt vanzelf op de homepage (vijf nieuwste) en in *Alle stukken* 
 
 ## Consultancy en portfolio
 
-Het consultancy-gedeelte staat op `/consultancy/`: een korte introductie en je projecten. Elk project is een Markdown-bestand in `src/consultancy/`:
+Het consultancy-gedeelte staat op `/consultancy/`: een korte introductie, de drie soorten werk, je projecten (zoals de Yakiniku-casus) en een contactblok. Introductie, soorten werk en contact-e-mail staan in `src/_data/consultancy.js`; het contactblok staat ook onder elk project. Elk project is een Markdown-bestand in `src/consultancy/`:
 
 ```markdown
 ---
@@ -57,7 +67,7 @@ date: 2026-03-01
 …
 ```
 
-`date` bepaalt de volgorde (nieuwste bovenaan). De introductie en je contactgegevens staan in `src/_data/consultancy.js`.
+`date` bepaalt de volgorde (nieuwste bovenaan).
 
 **Concepten.** Zet `concept: true` bovenaan een stuk of project. Dan zie je het wel tijdens `npm start` (met het label *Concept*), maar komt het niet op de echte site. Het hele consultancy-gedeelte staat nog uit: pas als je in `src/_data/consultancy.js` `klaar: true` zet, verschijnt het op alduslab.eu, inclusief de link in de kop.
 
@@ -70,13 +80,23 @@ src/
   css/style.css           alle typografie en kleuren
   stukken/*.md            de artikelen
   consultancy/*.md        de projecten
-  _data/consultancy.js    introductie, contact, aan/uit
+  _data/consultancy.js    introductie, soorten werk, contact, aan/uit
+  _data/nieuwsbrief.js    adres van Listmonk, lijst-UUID, tekst bij het formulier
+  _includes/partials/     aanmeldformulier, contactblok
   index.njk               homepage
   stukken.njk             overzicht van alle stukken
+  zoeken.njk              zoekpagina (Pagefind)
+  nieuwsbrief.njk         pagina om je aan te melden
 docs/domein.md            domein en DNS
-docs/online-zetten.md     stappenplan en beheer op de Hetzner-server
+docs/online-zetten.md     stappenplan, beheer en automatisch online zetten
+docs/nieuwsbrief.md       Listmonk: installeren, Substack-overstap, beheer
+docs/radar.md             de wekelijkse regelgevingsradar
 Dockerfile, docker/       de container die de site bouwt en serveert
 deploy/update.sh          nieuwe versie live zetten (op de server)
+.github/workflows/        online zetten na elke push naar main
+listmonk/                 Docker-opzet voor Listmonk
+radar/                    regelgevingsradar (Miniflux → Claude → overzicht)
+scripts/                  hulpscripts, zoals de Substack-import
 eleventy.config.js        Eleventy-instellingen
 ```
 

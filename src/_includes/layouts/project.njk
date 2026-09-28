@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 ---
-<article class="artikel project">
+<article class="artikel project" data-pagefind-body>
   <header>
     <p class="sectiekop"><a href="/consultancy/">Consultancy</a>{% if concept %} · Concept{% endif %}</p>
     <h1>{{ title }}</h1>
@@ -17,4 +17,5 @@ layout: layouts/base.njk
     {{ content | safe }}
   </div>
 </article>
+{% include "partials/contact.njk" %}
 <nav class="terug"><a href="/consultancy/">← Alle projecten</a></nav>

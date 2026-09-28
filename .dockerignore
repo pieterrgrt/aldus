@@ -2,3 +2,7 @@ node_modules
 _site
 .git
 docs
+listmonk
+radar
+scripts
+.github

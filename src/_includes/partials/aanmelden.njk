@@ -1,0 +1,17 @@
+{#- Aanmeldformulier voor de nieuwsbrief. Stuurt rechtstreeks naar Listmonk; Listmonk
+    stuurt daarna een bevestigingsmail (double opt-in) en toont zelf de bedankpagina. -#}
+{% if nieuwsbrief.lijst or eleventy.env.runMode != "build" %}
+<section class="aanmelden" aria-labelledby="aanmelden-kop">
+  <h2 id="aanmelden-kop" class="sectiekop">{{ nieuwsbrief.titel }}</h2>
+  {% if not zonderTekst %}<p>{{ nieuwsbrief.tekst }}</p>{% endif %}
+  {% if not nieuwsbrief.lijst %}<p class="meta"><span class="label">Concept</span> Vul de lijst-UUID in bij <code>src/_data/nieuwsbrief.js</code>; tot dan werkt dit formulier niet.</p>{% endif %}
+  <form method="post" action="{{ nieuwsbrief.url }}/subscription/form" class="aanmeldformulier">
+    <label for="aanmelden-email" class="verborgen">E-mailadres</label>
+    <input id="aanmelden-email" type="email" name="email" required autocomplete="email" placeholder="je@adres.nl">
+    <input type="hidden" name="l" value="{{ nieuwsbrief.lijst }}">
+    {#- Lokfield tegen spambots: mensen zien het niet en laten het leeg. -#}
+    <input name="nonce" value="" class="verborgen" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button type="submit">Aanmelden</button>
+  </form>
+</section>
+{% endif %}

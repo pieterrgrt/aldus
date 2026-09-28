@@ -6,7 +6,7 @@ Aldus draait op de Hetzner-server, net als liveaux: in een eigen Docker-containe
 | --- | --- | --- | --- | --- |
 | alduslab | alduslab.eu, www.alduslab.eu | 8003 | ~/aldus | github.com/pieterrgrt/aldus |
 
-Neem deze rij over in de tabel van *Website live zetten op Hetzner*. De volgende site krijgt dan 8004. In gebruik op 28 september 2026: 8001 (liveaux), 8002 (onbekend, zie `docker ps`), 8003 (Aldus), 11000 (Nextcloud).
+Neem deze rij over in de tabel van *Website live zetten op Hetzner*. In gebruik op 28 september 2026: 8001 (liveaux), 8002 (onbekend, zie `docker ps`), 8003 (Aldus), 8004 (Listmonk, zie `docs/nieuwsbrief.md`), 11000 (Nextcloud). De volgende krijgt 8005.
 
 `cloud.alduslab.eu` (Nextcloud), `vault.alduslab.eu` en de Proton-mail blijven zoals ze zijn. Dit plan raakt alleen `alduslab.eu` en `www`.
 
@@ -123,10 +123,52 @@ Alle opdrachten in `~/aldus`.
 
 | Wat | Opdracht |
 | --- | --- |
-| Nieuwe versie live zetten | `./deploy/update.sh` (haalt `main` op, bouwt opnieuw, ruimt oude images op) |
+| Nieuwe versie live zetten | gaat vanzelf na een push naar `main` (zie hieronder); met de hand: `./deploy/update.sh` |
+| Zien of het online zetten lukte | GitHub → Actions → *Online zetten* |
 | Draait alles? | `docker compose ps` |
 | Verzoeken en fouten bekijken | `docker compose logs -f web` (stoppen: Ctrl+C) |
 | nginx-config testen na een wijziging | `sudo nginx -t && sudo systemctl reload nginx` |
 | Certificaten controleren | `sudo certbot certificates` |
 
 Een back-up is niet nodig. Alles staat in de repository en de server bouwt de site daaruit opnieuw op.
+
+## Automatisch online zetten
+
+Na elke push naar `main` bouwt GitHub de site eerst ter controle. Lukt dat, dan logt GitHub in op de server en draait daar `./deploy/update.sh`. Daarna kijkt de workflow of `https://alduslab.eu/` antwoordt. De workflow staat in `.github/workflows/online-zetten.yml`; je ziet elke ronde onder *Actions* op GitHub. Mislukt het bouwen, dan blijft de oude versie gewoon online.
+
+GitHub krijgt daarvoor een eigen SSH-sleutel die op de server **alleen** `deploy/update.sh` mag draaien, niets anders. Eenmalig instellen:
+
+1. **Sleutel maken**, op de server:
+
+   ```bash
+   ssh-keygen -t ed25519 -N "" -C "github-actions-aldus" -f ~/.ssh/github-aldus
+   ```
+
+2. **Beperkt toelaten.** Zet de publieke sleutel in `~/.ssh/authorized_keys`, met ervoor welke opdracht hij mag draaien:
+
+   ```bash
+   echo "command=\"cd /root/aldus && ./deploy/update.sh\",restrict $(cat ~/.ssh/github-aldus.pub)" >> ~/.ssh/authorized_keys
+   ```
+
+   `restrict` zet port forwarding, een terminal en de rest uit. Wat GitHub ook stuurt, er draait alleen `update.sh`.
+
+3. **`git pull` zonder wachtwoord.** `update.sh` haalt `main` op. Is de repository privé, dan moet de server dat kunnen zonder te vragen. Controleer met `cd ~/aldus && git pull`; vraagt hij om een wachtwoord, sla het token dan op met `git config credential.helper store` en één keer `git pull` met het token als wachtwoord. Gebruik een *fine-grained token* met alleen leesrecht (*Contents: Read-only*) op deze ene repository.
+
+4. **Geheimen op GitHub.** Repository → Settings → Secrets and variables → Actions → *New repository secret*:
+
+   | Naam | Waarde |
+   | --- | --- |
+   | `DEPLOY_HOST` | `178.105.62.224` |
+   | `DEPLOY_SSH_KEY` | de inhoud van `~/.ssh/github-aldus` (de privésleutel, zonder `.pub`, inclusief de BEGIN- en END-regels) |
+   | `DEPLOY_KNOWN_HOSTS` | de uitvoer van `ssh-keyscan -t ed25519 178.105.62.224`, op je laptop gedraaid |
+
+   Verwijder daarna de privésleutel van de server: `rm ~/.ssh/github-aldus`. Hij staat nu alleen nog als geheim bij GitHub.
+
+5. **Testen.** GitHub → Actions → *Online zetten* → *Run workflow*. Groen = goed.
+
+| Wat je ziet | Oorzaak | Oplossing |
+| --- | --- | --- |
+| `Permission denied (publickey)` | Sleutel niet (goed) in `authorized_keys`, of het geheim mist een regel | Stap 2 en 4 nalopen; het geheim moet met `-----BEGIN` beginnen en met `-----END …-----` eindigen |
+| `Host key verification failed` | `DEPLOY_KNOWN_HOSTS` klopt niet | Opnieuw `ssh-keyscan -t ed25519 178.105.62.224` en het geheim vervangen |
+| `Not possible to fast-forward` | Op de server is iets in `~/aldus` met de hand gewijzigd | Op de server: `cd ~/aldus && git status`; wijzigingen weggooien met `git checkout -- .` of eerst committen |
+| Blijft hangen op `Username for 'https://github.com'` | Stap 3 | Token opslaan zoals in stap 3 |

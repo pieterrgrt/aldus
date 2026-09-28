@@ -8,7 +8,18 @@ permalink: /consultancy/
 <section class="intro">
   <h1>{{ consultancy.titel }}</h1>
   <p class="lead">{{ consultancy.intro }}</p>
-  {% if consultancy.contact %}<p class="meta">Contact: {{ consultancy.contact }}</p>{% endif %}
+</section>
+
+<section aria-labelledby="werk">
+  <h2 id="werk" class="sectiekop">Wat ik doe</h2>
+  <ol class="werk">
+  {% for soort in consultancy.werk %}
+    <li>
+      <h3>{{ soort.titel }}</h3>
+      <p>{{ soort.tekst }}</p>
+    </li>
+  {% endfor %}
+  </ol>
 </section>
 
 <section aria-labelledby="projecten">
@@ -23,3 +34,5 @@ permalink: /consultancy/
   {% endfor %}
   </ol>
 </section>
+
+{% include "partials/contact.njk" %}
