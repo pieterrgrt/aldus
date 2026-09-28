@@ -12,6 +12,10 @@ npm start        # site op http://localhost:8080, ververst bij elke wijziging
 npm run build    # bouwt de site naar _site/
 ```
 
+## Online
+
+De site draait op de Hetzner-server als Docker-container. Een nieuwe versie zet je live met `./deploy/update.sh` op de server; zie `docs/online-zetten.md`.
+
 ## Een stuk schrijven
 
 Maak een nieuw bestand in `src/stukken/`, bijvoorbeeld `src/stukken/mijn-stuk.md`:
@@ -70,6 +74,9 @@ src/
   index.njk               homepage
   stukken.njk             overzicht van alle stukken
 docs/domein.md            domein en DNS
+docs/online-zetten.md     stappenplan en beheer op de Hetzner-server
+Dockerfile, docker/       de container die de site bouwt en serveert
+deploy/update.sh          nieuwe versie live zetten (op de server)
 eleventy.config.js        Eleventy-instellingen
 ```
 

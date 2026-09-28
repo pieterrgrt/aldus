@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    # Alleen bereikbaar op de server zelf; de nginx van de server stuurt alduslab.eu hierheen.
+    ports:
+      - "127.0.0.1:8002:80"
