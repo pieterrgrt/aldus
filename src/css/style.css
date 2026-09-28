@@ -1,9 +1,19 @@
 /*
-  Aldus — typografie
-  Eén lettertype: Source Serif 4 (variabel, met optische maten), zelf gehost.
-  Tekstmaat ~65 tekens, ruime regelafstand, schaal op basis van 1.25.
+  Aldus — huisstijl
+  Afgeleid van het beeldmerk: Aldus-blauw (#0d3793) op wit, zware geometrische schreefloze letter.
+  - Montserrat (variabel) voor merknaam, koppen en interface.
+  - Source Serif 4 (variabel, optische maten) voor lopende tekst.
+  Tekstmaat ~65 tekens, regelafstand 1,6, verticale ritme in hele regels (--ruimte).
+  Alle waarden staan ook in het designsysteem (tokens.json).
 */
 
+@font-face {
+  font-family: "Montserrat Variable";
+  src: url("/fonts/montserrat-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 @font-face {
   font-family: "Source Serif 4";
   src: url("/fonts/source-serif-4-normal.woff2") format("woff2");
@@ -20,29 +30,38 @@
 }
 
 :root {
-  /* Kleuren: warm papier, bijna-zwarte inkt, rubriceerrood als enige accent. */
-  --papier: #fbf8f2;
-  --inkt: #1e1c1a;
-  --inkt-zacht: #5d5750;
-  --lijn: #e3ddd2;
-  --rood: #a3281c;
+  color-scheme: light;
 
+  /* Kleur */
+  --blauw: #0d3793;        /* Aldus-blauw, uit het beeldmerk */
+  --blauw-diep: #09286e;   /* hover en actief */
+  --blauw-tint: #eef1fa;   /* rustige vlakken: code, markering */
+  --papier: #ffffff;
+  --inkt: #161a26;
+  --inkt-zacht: #555c70;
+  --lijn: #e5e5e5;         /* dezelfde grijze rand als rond het beeldmerk */
+
+  /* Letter */
+  --sans: "Montserrat Variable", Montserrat, "Helvetica Neue", Arial, sans-serif;
   --serif: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
 
   /* Maten */
   --tekstgrootte: clamp(1.125rem, 1rem + 0.45vw, 1.3125rem); /* 18–21px */
   --regel: 1.6;
-  --maat: 34rem; /* ~65 tekens bij deze letter */
-  --ruimte: 1.6rem; /* één regel: basis voor verticale witruimte */
+  --maat: 34rem;   /* ~65 tekens */
+  --ruimte: 1.6rem; /* één regel */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --papier: #181716;
-    --inkt: #e8e3da;
-    --inkt-zacht: #a39c92;
-    --lijn: #34312d;
-    --rood: #e0806f;
+    color-scheme: dark;
+    --blauw: #9db4f5;
+    --blauw-diep: #c3d1fa;
+    --blauw-tint: #18214a;
+    --papier: #0b1024;
+    --inkt: #e7eaf3;
+    --inkt-zacht: #a0a8bd;
+    --lijn: #262e4a;
   }
 }
 
@@ -63,7 +82,7 @@ body {
   font-optical-sizing: auto;
   font-kerning: normal;
   font-variant-ligatures: common-ligatures;
-  font-feature-settings: "onum" 1; /* mediaevale cijfers in lopende tekst */
+  font-feature-settings: "onum" 1;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   hanging-punctuation: first;
@@ -76,55 +95,75 @@ body {
   box-sizing: content-box;
 }
 
-/* Kop en voet */
+:focus-visible { outline: 2px solid var(--blauw); outline-offset: 3px; border-radius: 2px; }
+
+/* Kop: beeldmerk + merknaam */
 .kop {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding-block: 2rem 0;
-  font-size: 0.9rem;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1.75rem 0;
+  font-family: var(--sans);
 }
 .merk {
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
   text-decoration: none;
-  color: var(--inkt);
+  color: var(--blauw);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
 }
-.kop nav a { color: var(--inkt-zacht); text-decoration: none; }
-.kop nav a:hover, .kop nav a[aria-current] { color: var(--inkt); }
+.merk img {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--lijn);
+}
+.kop nav a {
+  color: var(--inkt-zacht);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.kop nav a:hover, .kop nav a[aria-current] { color: var(--blauw); }
 
 main { padding-block: calc(var(--ruimte) * 3) calc(var(--ruimte) * 2); }
 
 .voet {
   padding-block: var(--ruimte) calc(var(--ruimte) * 2);
   color: var(--inkt-zacht);
-  font-size: 0.8rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 .voet p { border-top: 1px solid var(--lijn); padding-top: var(--ruimte); margin: 0; }
 
 /* Koppen */
 h1, h2, h3 {
-  line-height: 1.2;
-  font-weight: 600;
+  font-family: var(--sans);
+  line-height: 1.15;
   text-wrap: balance;
-  font-feature-settings: "lnum" 1;
+  letter-spacing: -0.015em;
 }
 h1 {
-  font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: var(--blauw);
   margin: 0 0 calc(var(--ruimte) * 0.5);
 }
-h2 { font-size: 1.35rem; margin: calc(var(--ruimte) * 2) 0 calc(var(--ruimte) * 0.5); }
-h3 { font-size: 1.1rem; margin: calc(var(--ruimte) * 1.5) 0 calc(var(--ruimte) * 0.25); }
+h2 { font-size: 1.3rem; font-weight: 700; margin: calc(var(--ruimte) * 2) 0 calc(var(--ruimte) * 0.5); }
+h3 { font-size: 1.05rem; font-weight: 700; margin: calc(var(--ruimte) * 1.5) 0 calc(var(--ruimte) * 0.25); }
 
 .sectiekop {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--inkt-zacht);
+  color: var(--blauw);
   margin-bottom: var(--ruimte);
 }
 
@@ -132,8 +171,13 @@ h3 { font-size: 1.1rem; margin: calc(var(--ruimte) * 1.5) 0 calc(var(--ruimte) *
 p, ul, ol, blockquote, pre, figure { margin: 0 0 var(--ruimte); }
 p { text-wrap: pretty; hyphens: auto; }
 
-a { color: inherit; text-decoration-color: var(--rood); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-a:hover { color: var(--rood); }
+a {
+  color: inherit;
+  text-decoration-color: var(--blauw);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.18em;
+}
+a:hover { color: var(--blauw); }
 
 .lead {
   font-size: 1.2em;
@@ -143,54 +187,63 @@ a:hover { color: var(--rood); }
   margin-bottom: var(--ruimte);
 }
 .meta {
-  font-size: 0.8rem;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--inkt-zacht);
-  font-feature-settings: "lnum" 1;
 }
 
 .artikel header { margin-bottom: calc(var(--ruimte) * 2); }
 
-.tekst > p:first-child::first-letter {
-  /* Kleine versiering: eerste letter in rood, niet verzonken. */
-  color: var(--rood);
-}
-
 blockquote {
   margin-inline: 0;
   padding-left: 1.2rem;
-  border-left: 2px solid var(--rood);
+  border-left: 3px solid var(--blauw);
   font-style: italic;
 }
 blockquote p:last-child { margin-bottom: 0; }
 
 ul, ol { padding-left: 1.25rem; }
 li + li { margin-top: 0.3em; }
+li::marker { color: var(--blauw); font-family: var(--sans); font-weight: 700; font-size: 0.85em; }
 
 hr {
   border: 0;
   margin: calc(var(--ruimte) * 2) 0;
   text-align: center;
 }
-hr::after { content: "⁂"; color: var(--inkt-zacht); }
+hr::after { content: "⁂"; color: var(--blauw); }
 
 code, pre { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.85em; }
-pre { overflow-x: auto; padding: 1rem; background: color-mix(in srgb, var(--lijn) 40%, transparent); }
+code { background: var(--blauw-tint); padding: 0.1em 0.3em; border-radius: 3px; }
+pre { overflow-x: auto; padding: 1rem; background: var(--blauw-tint); border-radius: 4px; }
+pre code { background: none; padding: 0; }
 
 img { max-width: 100%; height: auto; }
 
 /* Voetnoten (markdown-it-footnote) */
-.footnote-ref a, .footnote-backref { text-decoration: none; color: var(--rood); }
-.footnote-ref { font-size: 0.7em; line-height: 0; }
-.footnotes-sep { margin: calc(var(--ruimte) * 2) 0 var(--ruimte); }
+.footnote-ref a, .footnote-backref { text-decoration: none; color: var(--blauw); font-family: var(--sans); font-weight: 700; }
+.footnote-ref { font-size: 0.65em; line-height: 0; }
+hr.footnotes-sep { margin: calc(var(--ruimte) * 2) 0 var(--ruimte); border-top: 1px solid var(--lijn); }
+hr.footnotes-sep::after { content: none; }
 .footnotes { font-size: 0.85rem; color: var(--inkt-zacht); }
 
 /* Lijsten van stukken */
 .lijst { list-style: none; padding: 0; margin-bottom: calc(var(--ruimte) * 1.5); }
 .lijst li { margin: 0 0 calc(var(--ruimte) * 1.25); }
-.lijst a { font-size: 1.2em; font-weight: 500; text-decoration: none; }
-.lijst a:hover { text-decoration: underline; text-decoration-color: var(--rood); }
-.lijst p { margin: 0.2em 0 0.1em; }
-.lijst time { display: block; font-size: 0.8rem; color: var(--inkt-zacht); }
+.lijst li::marker { content: none; }
+.lijst a {
+  font-family: var(--sans);
+  font-size: 1.15em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  text-decoration: none;
+  color: var(--inkt);
+}
+.lijst a:hover { color: var(--blauw); }
+.lijst p { margin: 0.25em 0 0.15em; }
+.lijst time { display: block; font-family: var(--sans); font-size: 0.72rem; font-weight: 500; color: var(--inkt-zacht); }
 
 .lijst--compact li {
   display: flex;
@@ -199,12 +252,14 @@ img { max-width: 100%; height: auto; }
   gap: 1rem;
   margin-bottom: calc(var(--ruimte) * 0.5);
 }
-.lijst--compact a { font-size: 1em; font-weight: 400; }
-.lijst--compact time { flex-shrink: 0; }
+.lijst--compact a { font-size: 1em; font-weight: 600; }
+.lijst--compact time { flex-shrink: 0; font-variant-numeric: tabular-nums; }
 
 .intro { margin-bottom: calc(var(--ruimte) * 2); }
-.terug { margin-top: calc(var(--ruimte) * 2); font-size: 0.9rem; }
+.intro h1 { font-size: clamp(2.6rem, 1.8rem + 3.5vw, 3.8rem); }
+.terug { margin-top: calc(var(--ruimte) * 2); font-family: var(--sans); font-size: 0.8rem; font-weight: 600; }
 .terug a { text-decoration: none; color: var(--inkt-zacht); }
+.terug a:hover { color: var(--blauw); }
 
 @media (max-width: 30rem) {
   .lijst--compact li { display: block; }

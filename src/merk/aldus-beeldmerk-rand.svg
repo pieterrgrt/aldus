@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 176 176" role="img" aria-label="Aldus">
+  <title>Aldus</title>
+  <defs><clipPath id="aldus-schijf"><circle cx="88" cy="88" r="88"/></clipPath></defs>
+  <circle cx="88" cy="88" r="88" fill="#ffffff"/>
+  <g clip-path="url(#aldus-schijf)" fill="#0d3793" fill-rule="evenodd">
+    <path d="M65.6 54.8H87.1L128.9 132.5H106.5L97.4 114.8H55.3L46.7 132.5H24.8Z M76 72.8L90.9 102H61.6Z"/>
+    <rect x="121.1" y="34.8" width="21.4" height="81.7"/>
+    <path d="M174.7 76.5A24.3 26 0 1 0 174.7 128.5A24.3 26 0 1 0 174.7 76.5Z M177.3 90A7 13.5 0 1 1 177.3 117A7 13.5 0 1 1 177.3 90Z"/>
+  </g>
+  <circle cx="88" cy="88" r="87.25" fill="none" stroke="#e5e5e5" stroke-width="1.5"/>
+</svg>
