@@ -1,0 +1,26 @@
+{
+  "name": "aldus",
+  "version": "1.0.0",
+  "description": "Aldus — een leessite, gebouwd met Eleventy",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pieterrgrt/aldus.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/pieterrgrt/aldus/issues"
+  },
+  "homepage": "https://github.com/pieterrgrt/aldus#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.6",
+    "@fontsource-variable/source-serif-4": "^5.3.0",
+    "markdown-it-footnote": "^4.0.0"
+  },
+  "private": true,
+  "type": "module"
+}

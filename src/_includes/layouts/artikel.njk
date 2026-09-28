@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+---
+<article class="artikel">
+  <header>
+    <h1>{{ title }}</h1>
+    {% if samenvatting %}<p class="lead">{{ samenvatting }}</p>{% endif %}
+    <p class="meta">
+      <time datetime="{{ page.date | isoDatum }}">{{ page.date | datum }}</time>
+      · {{ content | leestijd }} min lezen
+    </p>
+  </header>
+  <div class="tekst">
+    {{ content | safe }}
+  </div>
+</article>
+<nav class="terug"><a href="/stukken/">← Alle stukken</a></nav>
