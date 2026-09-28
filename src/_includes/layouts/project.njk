@@ -1,0 +1,20 @@
+---
+layout: layouts/base.njk
+---
+<article class="artikel project">
+  <header>
+    <p class="sectiekop"><a href="/consultancy/">Consultancy</a>{% if concept %} · Concept{% endif %}</p>
+    <h1>{{ title }}</h1>
+    {% if samenvatting %}<p class="lead">{{ samenvatting }}</p>{% endif %}
+    <dl class="feiten">
+      {% if opdrachtgever %}<div><dt>Opdrachtgever</dt><dd>{{ opdrachtgever }}</dd></div>{% endif %}
+      {% if periode %}<div><dt>Periode</dt><dd>{{ periode }}</dd></div>{% endif %}
+      {% if rol %}<div><dt>Rol</dt><dd>{{ rol }}</dd></div>{% endif %}
+      {% if diensten %}<div><dt>Werk</dt><dd>{{ diensten | join(", ") }}</dd></div>{% endif %}
+    </dl>
+  </header>
+  <div class="tekst">
+    {{ content | safe }}
+  </div>
+</article>
+<nav class="terug"><a href="/consultancy/">← Alle projecten</a></nav>

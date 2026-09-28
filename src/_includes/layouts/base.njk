@@ -18,6 +18,7 @@
     <a class="merk" href="/"><img src="/merk/aldus-beeldmerk.svg" alt="" width="40" height="40">{{ site.titel }}</a>
     <nav aria-label="Hoofdmenu">
       <a href="/stukken/"{% if page.url == "/stukken/" %} aria-current="page"{% endif %}>Alle stukken</a>
+      {% if consultancy.klaar or eleventy.env.runMode != "build" %}<a href="/consultancy/"{% if onderdeel == "consultancy" %} aria-current="page"{% endif %}>{{ consultancy.titel }}</a>{% endif %}
     </nav>
   </header>
   <main id="inhoud">
