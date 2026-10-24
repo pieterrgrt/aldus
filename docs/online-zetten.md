@@ -6,9 +6,9 @@ Aldus draait op de Hetzner-server, net als liveaux: in een eigen Docker-containe
 | --- | --- | --- | --- | --- |
 | alduslab | alduslab.eu, www.alduslab.eu | 8003 | ~/aldus | github.com/pieterrgrt/aldus |
 
-Neem deze rij over in de tabel van *Website live zetten op Hetzner*. In gebruik op 28 september 2026: 8001 (liveaux), 8002 (onbekend, zie `docker ps`), 8003 (Aldus), 8004 (Listmonk, zie `docs/nieuwsbrief.md`), 11000 (Nextcloud). De volgende krijgt 8005.
+Neem deze rij over in de tabel van *Website live zetten op Hetzner*. In gebruik op 24 oktober 2026: 8001 (liveaux), 8002 (onbekend, zie `docker ps`), 8003 (Aldus), 8004 (Listmonk, zie `docs/nieuwsbrief.md`), 8005 (Fits, de sportapp op fits.alduslab.eu; eigen repository github.com/pieterrgrt/fits), 11000 (Nextcloud). De volgende krijgt 8006.
 
-`cloud.alduslab.eu` (Nextcloud), `vault.alduslab.eu` en de Proton-mail blijven zoals ze zijn. Dit plan raakt alleen `alduslab.eu` en `www`.
+`cloud.alduslab.eu` (Nextcloud), `vault.alduslab.eu`, `fits.alduslab.eu` (Fits) en de Proton-mail blijven zoals ze zijn. Dit plan raakt alleen `alduslab.eu` en `www`.
 
 ## Stappenplan
 
