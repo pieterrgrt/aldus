@@ -20,6 +20,7 @@
       <a href="/zoeken/"{% if page.url == "/zoeken/" %} aria-current="page"{% endif %}>Zoeken</a>
       <a href="/stukken/"{% if page.url == "/stukken/" %} aria-current="page"{% endif %}>Alle stukken</a>
       {% if consultancy.klaar or eleventy.env.runMode != "build" %}<a href="/consultancy/"{% if onderdeel == "consultancy" %} aria-current="page"{% endif %}>{{ consultancy.titel }}</a>{% endif %}
+      {% if winkel.klaar or eleventy.env.runMode != "build" %}<a href="/winkel/"{% if onderdeel == "winkel" %} aria-current="page"{% endif %}>{{ winkel.titel }}</a>{% endif %}
       {% if nieuwsbrief.lijst or eleventy.env.runMode != "build" %}<a href="/nieuwsbrief/"{% if onderdeel == "nieuwsbrief" %} aria-current="page"{% endif %}>Nieuwsbrief</a>{% endif %}
     </nav>
   </header>

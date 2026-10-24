@@ -366,6 +366,11 @@ hr.footnotes-sep::after { content: none; }
   .knop, .knop:hover { color: var(--papier); }
 }
 
+/* Winkel */
+.product .sectiekop { margin-bottom: calc(var(--ruimte) * 0.5); }
+.product .sectiekop a { color: inherit; text-decoration: none; }
+.bestellen .knop { margin-bottom: var(--ruimte); }
+
 /* Zoeken (Pagefind) */
 .zoeken {
   --pagefind-ui-scale: 0.9;

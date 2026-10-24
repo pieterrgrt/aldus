@@ -23,17 +23,24 @@ export default function (eleventyConfig) {
 
   // Concepten zie je tijdens `npm start`, maar ze komen niet op de echte site (`npm run build`).
   // Het consultancy-gedeelte blijft offline tot `klaar: true` in src/_data/consultancy.js,
-  // de nieuwsbriefpagina tot de lijst-UUID in src/_data/nieuwsbrief.js staat.
+  // de nieuwsbriefpagina tot de lijst-UUID in src/_data/nieuwsbrief.js staat,
+  // de winkel tot `klaar: true` in src/_data/winkel.js.
   eleventyConfig.addPreprocessor("concepten", "*", (data) => {
     if (process.env.ELEVENTY_RUN_MODE !== "build") return;
     if (data.concept) return false;
     if (data.onderdeel === "consultancy" && !data.consultancy.klaar) return false;
     if (data.onderdeel === "nieuwsbrief" && !data.nieuwsbrief.lijst) return false;
+    if (data.onderdeel === "winkel" && !data.winkel.klaar) return false;
   });
 
   // Consultancyprojecten, nieuwste eerst.
   eleventyConfig.addCollection("projecten", (api) =>
     api.getFilteredByGlob("src/consultancy/*.md").sort((a, b) => b.date - a.date)
+  );
+
+  // Producten in de winkel, op `volgorde`.
+  eleventyConfig.addCollection("producten", (api) =>
+    api.getFilteredByGlob("src/winkel/*.md").sort((a, b) => (a.data.volgorde ?? 99) - (b.data.volgorde ?? 99))
   );
 
   // Alle stukken, nieuwste eerst.

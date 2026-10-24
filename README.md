@@ -71,6 +71,25 @@ date: 2026-03-01
 
 **Concepten.** Zet `concept: true` bovenaan een stuk of project. Dan zie je het wel tijdens `npm start` (met het label *Concept*), maar komt het niet op de echte site. Het hele consultancy-gedeelte staat nog uit: pas als je in `src/_data/consultancy.js` `klaar: true` zet, verschijnt het op alduslab.eu, inclusief de link in de kop.
 
+## Winkel
+
+De winkel staat op `/winkel/`: downloads en sessies rond werken met Claude. Introductie, bestel-e-mail en de disclaimer staan in `src/_data/winkel.js`; elk product is een Markdown-bestand in `src/winkel/`:
+
+```markdown
+---
+title: Naam van het product
+samenvatting: Eén zin over wat het is en voor wie.
+prijs: "€ 29"
+soort: Download
+levering: Direct, als zip
+voor: Voor wie het is
+volgorde: 1
+betaallink: "https://…"
+---
+```
+
+`volgorde` bepaalt de volgorde op de overzichtspagina. De knop *Bestellen* gaat naar de `betaallink` (bijvoorbeeld een betaallink van Mollie, Stripe of Gumroad; die regelen ook btw en de download). Zonder betaallink wordt het een knop om per mail te bestellen, als `email` in `src/_data/winkel.js` staat. Net als consultancy staat de winkel uit tot je `klaar: true` zet.
+
 ## Indeling
 
 ```
@@ -80,7 +99,9 @@ src/
   css/style.css           alle typografie en kleuren
   stukken/*.md            de artikelen
   consultancy/*.md        de projecten
+  winkel/*.md             de producten in de winkel
   _data/consultancy.js    introductie, soorten werk, contact, aan/uit
+  _data/winkel.js         introductie winkel, bestel-e-mail, disclaimer, aan/uit
   _data/nieuwsbrief.js    adres van Listmonk, lijst-UUID, tekst bij het formulier
   _includes/partials/     aanmeldformulier, contactblok
   index.njk               homepage
