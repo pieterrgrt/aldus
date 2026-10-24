@@ -71,16 +71,61 @@ date: 2026-03-01
 
 **Concepten.** Zet `concept: true` bovenaan een stuk of project. Dan zie je het wel tijdens `npm start` (met het label *Concept*), maar komt het niet op de echte site. Het hele consultancy-gedeelte staat nog uit: pas als je in `src/_data/consultancy.js` `klaar: true` zet, verschijnt het op alduslab.eu, inclusief de link in de kop.
 
+## Winkel
+
+De winkel staat op `/winkel/`: downloads en sessies rond werken met Claude. Introductie, bestel-e-mail en de disclaimer staan in `src/_data/winkel.js`; elk product is een Markdown-bestand in `src/winkel/`:
+
+```markdown
+---
+title: Naam van het product
+samenvatting: Eén zin over wat het is en voor wie.
+prijs: "€ 29"
+soort: Download
+levering: Direct, als zip
+voor: Voor wie het is
+volgorde: 1
+betaallink: "https://…"
+---
+```
+
+`volgorde` bepaalt de volgorde op de overzichtspagina. De knop *Bestellen* gaat naar de `betaallink` (bijvoorbeeld een betaallink van Mollie, Stripe of Gumroad; die regelen ook btw en de download). Zonder betaallink wordt het een knop om per mail te bestellen, als `email` in `src/_data/winkel.js` staat. Net als consultancy staat de winkel uit tot je `klaar: true` zet.
+
+## Engelse versie
+
+De hele site bestaat ook in het Engels, onder `/en/`: homepage, stukken (`/en/articles/`), zoeken (`/en/search/`), consultancy (`/en/consulting/`), winkel (`/en/shop/`) en nieuwsbrief (`/en/newsletter/`). Rechtsboven in elke pagina staat een link naar dezelfde pagina in de andere taal; bestaat die nog niet, dan gaat de link naar de homepage.
+
+- **Een stuk vertalen.** Zet de vertaling in `src/en/stukken/` met **dezelfde bestandsnaam** als het Nederlandse stuk; zo weet de site welke twee bij elkaar horen. Het Engelse adres kies je met `slug`:
+
+  ```markdown
+  ---
+  title: In praise of white space
+  slug: in-praise-of-white-space
+  samenvatting: Why a page that says nothing sometimes says the most.
+  date: 2026-08-02
+  ---
+  ```
+
+  Projecten en producten gaan net zo, in `src/en/consultancy/` en `src/en/winkel/`. Een stuk zonder vertaling staat gewoon alleen op de Nederlandse site.
+- **Vaste teksten** (menu, knoppen, kopjes) en de adressen van de vaste pagina's staan per taal in `src/_data/teksten.js`.
+- **Teksten in de gegevensbestanden** (`site.js`, `consultancy.js`, `nieuwsbrief.js`, `winkel.js`) hebben hun Engelse versie onder `en`. Wat daar niet staat, zoals e-mailadres of `klaar`, geldt voor beide talen.
+- **Nieuwsbrief.** Engelse lezers melden zich aan voor dezelfde lijst; de pagina zegt dat de nieuwsbrief in het Nederlands is. Een aparte Engelse lijst: zet `lijst` onder `en` in `src/_data/nieuwsbrief.js`.
+- **Zoeken** maakt vanzelf een aparte index per taal.
+
 ## Indeling
 
 ```
 src/
   _data/site.js           titel, ondertitel, domein
-  _includes/layouts/      base.njk (elke pagina), artikel.njk (een stuk)
+  _includes/layouts/      base.njk (elke pagina), artikel.njk (een stuk), en de opbouw
+                          van homepage, overzicht, consultancy en winkel (voor beide talen)
+  _data/teksten.js        vaste teksten en adressen, per taal
   css/style.css           alle typografie en kleuren
   stukken/*.md            de artikelen
+  en/                     de Engelse versie, met dezelfde indeling (en.11tydata.js zet de taal)
   consultancy/*.md        de projecten
+  winkel/*.md             de producten in de winkel
   _data/consultancy.js    introductie, soorten werk, contact, aan/uit
+  _data/winkel.js         introductie winkel, bestel-e-mail, disclaimer, aan/uit
   _data/nieuwsbrief.js    adres van Listmonk, lijst-UUID, tekst bij het formulier
   _includes/partials/     aanmeldformulier, contactblok
   index.njk               homepage
@@ -98,6 +143,7 @@ listmonk/                 Docker-opzet voor Listmonk
 radar/                    regelgevingsradar (Miniflux → Claude → overzicht)
 scripts/                  hulpscripts, zoals de Substack-import
 eleventy.config.js        Eleventy-instellingen
+lib/in-taal.js            kiest de Engelse of Nederlandse teksten uit de gegevensbestanden
 ```
 
 ## Huisstijl

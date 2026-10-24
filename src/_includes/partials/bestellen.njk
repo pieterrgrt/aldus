@@ -1,0 +1,9 @@
+{#- Bestelknop voor één product: de betaallink (Mollie, Stripe, Gumroad) als die er is,
+    anders een mail. Verwacht de variabele `product` met title, prijs en betaallink. -#}
+{% if product.betaallink %}
+<a class="knop" href="{{ product.betaallink }}">{{ t.bestellen }} · {{ product.prijs }}</a>
+{% elif winkel.email %}
+<a class="knop" href="mailto:{{ winkel.email }}?subject={{ (winkel.onderwerp + ': ' + product.title) | urlencode }}">{{ t.bestellenPerMail }} · {{ product.prijs }}</a>
+{% elif eleventy.env.runMode != "build" %}
+<p class="meta"><span class="label">{{ t.concept }}</span> Zet een <code>betaallink</code> bij dit product, of vul <code>email</code> in bij <code>src/_data/winkel.js</code>.</p>
+{% endif %}

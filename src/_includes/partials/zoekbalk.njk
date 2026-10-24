@@ -1,0 +1,17 @@
+<div class="zoeken" id="zoeken"></div>
+{#- De zoekindex en de zoekbalk maakt Pagefind na het bouwen (npm run build) in _site/pagefind/.
+    Pagefind maakt per taal (het lang-attribuut van de pagina) een eigen index. -#}
+<link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+<script src="/pagefind/pagefind-ui.js"></script>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    if (!window.PagefindUI) {
+      document.getElementById("zoeken").innerHTML =
+        '<p class="meta">De zoekindex ontbreekt. Die ontstaat bij <code>npm run build</code>, niet bij <code>npm start</code>.</p>';
+      return;
+    }
+    const ui = new PagefindUI({ element: "#zoeken", showSubResults: true, showImages: false, resetStyles: false });
+    const q = new URLSearchParams(location.search).get("q");
+    if (q) ui.triggerSearch(q);
+  });
+</script>

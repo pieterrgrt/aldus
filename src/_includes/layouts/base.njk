@@ -1,11 +1,16 @@
+{%- set vertaling = collections.all | vertaling(page.inputPath) -%}
 <!doctype html>
-<html lang="{{ site.taal }}">
+<html lang="{{ taal }}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if title %}{{ title }} — {% endif %}{{ site.titel }}</title>
   <meta name="description" content="{{ samenvatting or site.ondertitel }}">
   <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  {%- if vertaling %}
+  <link rel="alternate" hreflang="{{ taal }}" href="{{ site.url }}{{ page.url }}">
+  <link rel="alternate" hreflang="{{ t.andere.taal }}" href="{{ site.url }}{{ vertaling }}">
+  {%- endif %}
   <meta name="theme-color" content="#0d3793">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
@@ -15,12 +20,14 @@
 </head>
 <body>
   <header class="kop">
-    <a class="merk" href="/"><img src="/merk/aldus-beeldmerk.svg" alt="" width="40" height="40">{{ site.titel }}</a>
-    <nav aria-label="Hoofdmenu">
-      <a href="/zoeken/"{% if page.url == "/zoeken/" %} aria-current="page"{% endif %}>Zoeken</a>
-      <a href="/stukken/"{% if page.url == "/stukken/" %} aria-current="page"{% endif %}>Alle stukken</a>
-      {% if consultancy.klaar or eleventy.env.runMode != "build" %}<a href="/consultancy/"{% if onderdeel == "consultancy" %} aria-current="page"{% endif %}>{{ consultancy.titel }}</a>{% endif %}
-      {% if nieuwsbrief.lijst or eleventy.env.runMode != "build" %}<a href="/nieuwsbrief/"{% if onderdeel == "nieuwsbrief" %} aria-current="page"{% endif %}>Nieuwsbrief</a>{% endif %}
+    <a class="merk" href="{{ t.url.home }}"><img src="/merk/aldus-beeldmerk.svg" alt="" width="40" height="40">{{ site.titel }}</a>
+    <nav aria-label="{{ t.hoofdmenu }}">
+      <a href="{{ t.url.zoeken }}"{% if page.url == t.url.zoeken %} aria-current="page"{% endif %}>{{ t.zoeken }}</a>
+      <a href="{{ t.url.stukken }}"{% if page.url == t.url.stukken %} aria-current="page"{% endif %}>{{ t.alleStukken }}</a>
+      {% if consultancy.klaar or eleventy.env.runMode != "build" %}<a href="{{ t.url.consultancy }}"{% if onderdeel == "consultancy" %} aria-current="page"{% endif %}>{{ consultancy.titel }}</a>{% endif %}
+      {% if winkel.klaar or eleventy.env.runMode != "build" %}<a href="{{ t.url.winkel }}"{% if onderdeel == "winkel" %} aria-current="page"{% endif %}>{{ winkel.titel }}</a>{% endif %}
+      {% if nieuwsbrief.lijst or eleventy.env.runMode != "build" %}<a href="{{ t.url.nieuwsbrief }}"{% if onderdeel == "nieuwsbrief" %} aria-current="page"{% endif %}>{{ t.nieuwsbrief }}</a>{% endif %}
+      <a class="taal" href="{{ vertaling or teksten[t.andere.taal].url.home }}" hreflang="{{ t.andere.taal }}" lang="{{ t.andere.taal }}">{{ t.andere.naam }}</a>
     </nav>
   </header>
   <main id="inhoud">

@@ -3,14 +3,14 @@ layout: layouts/base.njk
 ---
 <article class="artikel project" data-pagefind-body>
   <header>
-    <p class="sectiekop"><a href="/consultancy/">Consultancy</a>{% if concept %} · Concept{% endif %}</p>
+    <p class="sectiekop"><a href="{{ t.url.consultancy }}">{{ consultancy.titel }}</a>{% if concept %} · {{ t.concept }}{% endif %}</p>
     <h1>{{ title }}</h1>
     {% if samenvatting %}<p class="lead">{{ samenvatting }}</p>{% endif %}
     <dl class="feiten">
-      {% if opdrachtgever %}<div><dt>Opdrachtgever</dt><dd>{{ opdrachtgever }}</dd></div>{% endif %}
-      {% if periode %}<div><dt>Periode</dt><dd>{{ periode }}</dd></div>{% endif %}
-      {% if rol %}<div><dt>Rol</dt><dd>{{ rol }}</dd></div>{% endif %}
-      {% if diensten %}<div><dt>Werk</dt><dd>{{ diensten | join(", ") }}</dd></div>{% endif %}
+      {% if opdrachtgever %}<div><dt>{{ t.opdrachtgever }}</dt><dd>{{ opdrachtgever }}</dd></div>{% endif %}
+      {% if periode %}<div><dt>{{ t.periode }}</dt><dd>{{ periode }}</dd></div>{% endif %}
+      {% if rol %}<div><dt>{{ t.rol }}</dt><dd>{{ rol }}</dd></div>{% endif %}
+      {% if diensten %}<div><dt>{{ t.werk }}</dt><dd>{{ diensten | join(", ") }}</dd></div>{% endif %}
     </dl>
   </header>
   <div class="tekst">
@@ -18,4 +18,4 @@ layout: layouts/base.njk
   </div>
 </article>
 {% include "partials/contact.njk" %}
-<nav class="terug"><a href="/consultancy/">← Alle projecten</a></nav>
+<nav class="terug"><a href="{{ t.url.consultancy }}">← {{ t.alleProjecten }}</a></nav>

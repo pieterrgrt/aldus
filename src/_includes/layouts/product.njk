@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+---
+<article class="artikel product" data-pagefind-body>
+  <header>
+    <p class="sectiekop"><a href="{{ t.url.winkel }}">{{ winkel.titel }}</a>{% if concept %} · {{ t.concept }}{% endif %}</p>
+    <h1>{{ title }}</h1>
+    {% if samenvatting %}<p class="lead">{{ samenvatting }}</p>{% endif %}
+    <dl class="feiten">
+      {% if prijs %}<div><dt>{{ t.prijs }}</dt><dd>{{ prijs }}</dd></div>{% endif %}
+      {% if soort %}<div><dt>{{ t.soort }}</dt><dd>{{ soort }}</dd></div>{% endif %}
+      {% if levering %}<div><dt>{{ t.levering }}</dt><dd>{{ levering }}</dd></div>{% endif %}
+      {% if voor %}<div><dt>{{ t.voor }}</dt><dd>{{ voor }}</dd></div>{% endif %}
+    </dl>
+  </header>
+  <div class="tekst">
+    {{ content | safe }}
+  </div>
+</article>
+<section class="contact bestellen" aria-label="{{ t.bestellen }}">
+  {% set product = { title: title, prijs: prijs, betaallink: betaallink } %}
+  {% include "partials/bestellen.njk" %}
+  <p class="meta">{{ winkel.disclaimer }}</p>
+</section>
+<nav class="terug"><a href="{{ t.url.winkel }}">← {{ t.alleProducten }}</a></nav>

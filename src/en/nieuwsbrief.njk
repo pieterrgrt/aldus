@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+title: Newsletter
+onderdeel: nieuwsbrief
+permalink: /en/newsletter/
+---
+<section class="intro">
+  <h1>Newsletter</h1>
+  <p class="lead">{{ nieuwsbrief.tekst }}</p>
+</section>
+{% set zonderTekst = true %}
+{% include "partials/aanmelden.njk" %}
+<p class="meta">The newsletter is sent from a server of my own in Europe, with <a href="https://listmonk.app">Listmonk</a>. Your address is not used for anything else. Past issues are in the <a href="{{ nieuwsbrief.url }}/archive">archive</a>.</p>
