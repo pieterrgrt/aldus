@@ -21,6 +21,7 @@ export default {
     concept: "Concept",
 
     watIkDoe: "Wat ik doe",
+    aanbod: "Aanbod",
     projecten: "Projecten",
     alleProjecten: "Alle projecten",
     opdrachtgever: "Opdrachtgever",
@@ -63,6 +64,7 @@ export default {
     concept: "Draft",
 
     watIkDoe: "What I do",
+    aanbod: "Services",
     projecten: "Projects",
     alleProjecten: "All projects",
     opdrachtgever: "Client",

@@ -344,6 +344,18 @@ hr.footnotes-sep::after { content: none; }
 }
 .werk h3 { margin: 0 0 0.25rem; }
 .werk p { margin: 0; }
+.aanbod { list-style: none; padding: 0; margin-bottom: var(--ruimte); }
+.aanbod li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 1rem;
+  padding-block: calc(var(--ruimte) * 0.5);
+  border-top: 1px solid var(--lijn);
+}
+.aanbod li + li { margin-top: 0; }
+.aanbod h3 { margin: 0; }
+.aanbod .prijs { margin: 0; font: 700 0.9rem/1.6 var(--sans); color: var(--blauw); white-space: nowrap; }
+.aanbod p:last-child { grid-column: 1 / -1; margin: 0.15rem 0 0; }
 .contact {
   margin-top: calc(var(--ruimte) * 2);
   padding: var(--ruimte);

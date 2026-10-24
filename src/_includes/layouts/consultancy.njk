@@ -18,10 +18,28 @@ layout: layouts/base.njk
   </ol>
 </section>
 
+{% if consultancy.aanbod.length %}
+<section aria-labelledby="aanbod">
+  <h2 id="aanbod" class="sectiekop">{{ t.aanbod }}</h2>
+  <ul class="aanbod">
+  {% for product in consultancy.aanbod %}
+    <li>
+      <h3>{{ product.titel }}</h3>
+      <p class="prijs">{{ product.prijs }}</p>
+      <p>{{ product.tekst }}</p>
+    </li>
+  {% endfor %}
+  </ul>
+  {% if consultancy.aanbodNoot %}<p class="meta">{{ consultancy.aanbodNoot }}</p>{% endif %}
+</section>
+{% endif %}
+
+{% set projecten = collections["projecten_" + taal] %}
+{% if projecten.length %}
 <section aria-labelledby="projecten">
   <h2 id="projecten" class="sectiekop">{{ t.projecten }}</h2>
   <ol class="lijst projecten">
-  {% for project in collections["projecten_" + taal] %}
+  {% for project in projecten %}
     <li>
       <a href="{{ project.url }}">{{ project.data.title }}</a>{% if project.data.concept %} <span class="label">{{ t.concept }}</span>{% endif %}
       <p class="projectregel">{{ project.data.opdrachtgever }} · {{ project.data.periode }}</p>
@@ -30,5 +48,6 @@ layout: layouts/base.njk
   {% endfor %}
   </ol>
 </section>
+{% endif %}
 
 {% include "partials/contact.njk" %}

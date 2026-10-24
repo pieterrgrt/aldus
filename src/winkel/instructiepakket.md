@@ -1,4 +1,5 @@
 ---
+concept: true
 title: Claude op kantoor — instructiepakket
 samenvatting: Kant-en-klare projectinstructies en werkwijzen voor Claude, in het Nederlands, voor wie met wet- en regelgeving en zorgvuldige tekst werkt.
 prijs: "€ 29"

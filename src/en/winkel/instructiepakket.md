@@ -1,4 +1,5 @@
 ---
+concept: true
 title: Claude at the office — instruction pack
 slug: instruction-pack
 samenvatting: Ready-made project instructions and ways of working for Claude, for anyone who works with law, regulation and careful writing.

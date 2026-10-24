@@ -48,7 +48,7 @@ Het stuk verschijnt vanzelf op de homepage (vijf nieuwste) en in *Alle stukken* 
 
 ## Consultancy en portfolio
 
-Het consultancy-gedeelte staat op `/consultancy/`: een korte introductie, de drie soorten werk, je projecten (zoals de Yakiniku-casus) en een contactblok. Introductie, soorten werk en contact-e-mail staan in `src/_data/consultancy.js`; het contactblok staat ook onder elk project. Elk project is een Markdown-bestand in `src/consultancy/`:
+Het consultancy-gedeelte staat op `/consultancy/`: een korte introductie, de drie soorten werk, je projecten (zoals de Yakiniku-casus) en een contactblok. Introductie, soorten werk, aanbod en contact-e-mail staan in `src/_data/consultancy.js`; het contactblok staat ook onder elk project. Elk project is een Markdown-bestand in `src/consultancy/`:
 
 ```markdown
 ---
@@ -69,7 +69,7 @@ date: 2026-03-01
 
 `date` bepaalt de volgorde (nieuwste bovenaan).
 
-**Concepten.** Zet `concept: true` bovenaan een stuk of project. Dan zie je het wel tijdens `npm start` (met het label *Concept*), maar komt het niet op de echte site. Het hele consultancy-gedeelte staat nog uit: pas als je in `src/_data/consultancy.js` `klaar: true` zet, verschijnt het op alduslab.eu, inclusief de link in de kop.
+**Concepten.** Zet `concept: true` bovenaan een stuk of project. Dan zie je het wel tijdens `npm start` (met het label *Concept*), maar komt het niet op de echte site. Het consultancy-gedeelte staat aan (`klaar: true` in `src/_data/consultancy.js`); met `false` haal je het, inclusief de link in de kop, weer van alduslab.eu. De vaste producten met prijs (agentscan, regelcheck, …) staan onder `aanbod` in hetzelfde bestand. De kop *Projecten* verschijnt pas als er een project zonder `concept: true` is.
 
 ## Winkel
 
@@ -88,7 +88,7 @@ betaallink: "https://…"
 ---
 ```
 
-`volgorde` bepaalt de volgorde op de overzichtspagina. De knop *Bestellen* gaat naar de `betaallink` (bijvoorbeeld een betaallink van Mollie, Stripe of Gumroad; die regelen ook btw en de download). Zonder betaallink wordt het een knop om per mail te bestellen, als `email` in `src/_data/winkel.js` staat. Net als consultancy staat de winkel uit tot je `klaar: true` zet.
+`volgorde` bepaalt de volgorde op de overzichtspagina. De knop *Bestellen* gaat naar de `betaallink` (bijvoorbeeld een betaallink van Mollie, Stripe of Gumroad; die regelen ook btw en de download). Zonder betaallink wordt het een knop om per mail te bestellen, als `email` in `src/_data/winkel.js` staat. De winkel staat aan (`klaar: true` in `src/_data/winkel.js`); een los product verberg je met `concept: true`, zoals nu het instructiepakket.
 
 ## Engelse versie
 
