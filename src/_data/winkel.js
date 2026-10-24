@@ -1,13 +1,13 @@
 export default {
-  // Zet op true zodra prijzen, teksten en betaallinks kloppen. Tot die tijd zie je de
-  // winkel alleen lokaal (npm start) en staat hij niet op alduslab.eu.
-  klaar: false,
+  // Staat aan: de winkel is te zien op alduslab.eu. Op false zetten om hem weer alleen
+  // lokaal (npm start) te tonen. Een los product verberg je met `concept: true`.
+  klaar: true,
 
   titel: "Winkel",
   intro: "Wat ik zelf gebruik om met Claude te werken aan regelgeving en tekst, klaar om over te nemen. Downloads die je meteen hebt, en sessies voor wie het liever samen opzet.",
 
   // Wie geen betaallink heeft, krijgt een knop om per mail te bestellen.
-  email: "",
+  email: "regoortp@proton.me",
   onderwerp: "Bestelling via alduslab.eu",
 
   // Staat onder elk product en onder de winkel. Laat dit staan: Claude is een merk van Anthropic.
