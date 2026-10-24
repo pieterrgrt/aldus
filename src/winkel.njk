@@ -1,26 +1,7 @@
 ---
-layout: layouts/base.njk
+layout: layouts/winkel.njk
 onderdeel: winkel
 eleventyComputed:
   title: "{{ winkel.titel }}"
 permalink: /winkel/
 ---
-<section class="intro">
-  <h1>{{ winkel.titel }}</h1>
-  <p class="lead">{{ winkel.intro }}</p>
-</section>
-
-<section aria-labelledby="producten">
-  <h2 id="producten" class="sectiekop">Producten</h2>
-  <ol class="lijst producten">
-  {% for product in collections.producten %}
-    <li>
-      <a href="{{ product.url }}">{{ product.data.title }}</a>{% if product.data.concept %} <span class="label">Concept</span>{% endif %}
-      <p class="projectregel">{{ product.data.prijs }} · {{ product.data.soort }}</p>
-      {% if product.data.samenvatting %}<p>{{ product.data.samenvatting }}</p>{% endif %}
-    </li>
-  {% endfor %}
-  </ol>
-</section>
-
-<p class="meta">{{ winkel.disclaimer }}</p>

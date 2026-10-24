@@ -1,0 +1,34 @@
+---
+layout: layouts/base.njk
+---
+<section class="intro">
+  <h1>{{ consultancy.titel }}</h1>
+  <p class="lead">{{ consultancy.intro }}</p>
+</section>
+
+<section aria-labelledby="werk">
+  <h2 id="werk" class="sectiekop">{{ t.watIkDoe }}</h2>
+  <ol class="werk">
+  {% for soort in consultancy.werk %}
+    <li>
+      <h3>{{ soort.titel }}</h3>
+      <p>{{ soort.tekst }}</p>
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+
+<section aria-labelledby="projecten">
+  <h2 id="projecten" class="sectiekop">{{ t.projecten }}</h2>
+  <ol class="lijst projecten">
+  {% for project in collections["projecten_" + taal] %}
+    <li>
+      <a href="{{ project.url }}">{{ project.data.title }}</a>{% if project.data.concept %} <span class="label">{{ t.concept }}</span>{% endif %}
+      <p class="projectregel">{{ project.data.opdrachtgever }} · {{ project.data.periode }}</p>
+      {% if project.data.samenvatting %}<p>{{ project.data.samenvatting }}</p>{% endif %}
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+
+{% include "partials/contact.njk" %}

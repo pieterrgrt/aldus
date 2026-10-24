@@ -6,8 +6,8 @@ layout: layouts/base.njk
     <h1>{{ title }}</h1>
     {% if samenvatting %}<p class="lead">{{ samenvatting }}</p>{% endif %}
     <p class="meta">
-      <time datetime="{{ page.date | isoDatum }}">{{ page.date | datum }}</time>
-      · {{ content | leestijd }} min lezen
+      <time datetime="{{ page.date | isoDatum }}">{{ page.date | datum(taal) }}</time>
+      · {{ content | leestijd }} {{ t.minLezen }}
     </p>
   </header>
   <div class="tekst">
@@ -15,4 +15,4 @@ layout: layouts/base.njk
   </div>
 </article>
 {% include "partials/aanmelden.njk" %}
-<nav class="terug"><a href="/stukken/">← Alle stukken</a></nav>
+<nav class="terug"><a href="{{ t.url.stukken }}">← {{ t.alleStukken }}</a></nav>

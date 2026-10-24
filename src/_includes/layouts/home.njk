@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+---
+<section class="intro">
+  <h1>{{ site.titel }}</h1>
+  <p class="lead">{{ site.ondertitel }}</p>
+</section>
+
+<section aria-labelledby="recent">
+  <h2 id="recent" class="sectiekop">{{ t.recent }}</h2>
+  <ol class="lijst">
+  {% for stuk in collections["stukken_" + taal] | eerste(5) %}
+    <li>
+      <a href="{{ stuk.url }}">{{ stuk.data.title }}</a>
+      {% if stuk.data.samenvatting %}<p>{{ stuk.data.samenvatting }}</p>{% endif %}
+      <time datetime="{{ stuk.date | isoDatum }}">{{ stuk.date | datum(taal) }}</time>
+    </li>
+  {% endfor %}
+  </ol>
+  <p class="terug"><a href="{{ t.url.stukken }}">{{ t.alleStukken }} →</a></p>
+</section>
+
+{% include "partials/aanmelden.njk" %}

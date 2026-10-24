@@ -12,4 +12,12 @@ export default {
 
   // Staat onder elk product en onder de winkel. Laat dit staan: Claude is een merk van Anthropic.
   disclaimer: "Aldus is een zelfstandige site en niet verbonden aan Anthropic. Claude is een merk van Anthropic. Je hebt voor deze producten je eigen Claude-account of API-sleutel nodig.",
+
+  // Engelse versie (/en/shop/). Het e-mailadres en `klaar` gelden voor allebei.
+  en: {
+    titel: "Shop",
+    intro: "What I use myself to work with Claude on regulation and writing, ready to take over. Downloads you get straight away, and sessions for those who would rather set it up together.",
+    onderwerp: "Order via alduslab.eu",
+    disclaimer: "Aldus is an independent site and is not affiliated with Anthropic. Claude is a trademark of Anthropic. You need your own Claude account or API key for these products.",
+  },
 };

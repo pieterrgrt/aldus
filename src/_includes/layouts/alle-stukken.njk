@@ -1,0 +1,17 @@
+---
+layout: layouts/base.njk
+---
+<h1>{{ t.alleStukken }}</h1>
+{% for jaar, stukken in collections["stukken_" + taal] | perJaar %}
+<section aria-labelledby="jaar-{{ jaar }}">
+  <h2 id="jaar-{{ jaar }}" class="sectiekop">{{ jaar }}</h2>
+  <ol class="lijst lijst--compact">
+  {% for stuk in stukken %}
+    <li>
+      <a href="{{ stuk.url }}">{{ stuk.data.title }}</a>
+      <time datetime="{{ stuk.date | isoDatum }}">{{ stuk.date | datum(taal) }}</time>
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+{% endfor %}
