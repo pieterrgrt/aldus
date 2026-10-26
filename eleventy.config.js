@@ -20,6 +20,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/merk");
   eleventyConfig.addPassthroughCopy({ "src/favicon.svg": "favicon.svg", "src/favicon-32.png": "favicon-32.png", "src/apple-touch-icon.png": "apple-touch-icon.png" });
+  // Voor de server: /health geeft 200 zolang de site gebouwd en online is.
+  eleventyConfig.addPassthroughCopy({ "src/health": "health" });
   eleventyConfig.addWatchTarget("src/css/");
 
   eleventyConfig.amendLibrary("md", (md) => md.use(markdownItFootnote));

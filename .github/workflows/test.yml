@@ -1,0 +1,36 @@
+# Tests bij elke push en pull request. De server zet een nieuwe commit op main pas online
+# als deze workflow groen is, en controleert daarna /health. Zie docs/online-zetten.md.
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  site:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+
+  # Dezelfde container als op de server: geeft nginx /health en de homepage met 200?
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t aldus .
+      - run: docker run -d --name aldus -p 8003:80 aldus
+      - name: /health en / controleren
+        run: |
+          curl --fail --silent --show-error --retry 5 --retry-delay 1 --retry-all-errors http://localhost:8003/health
+          curl --fail --silent --show-error -o /dev/null http://localhost:8003/

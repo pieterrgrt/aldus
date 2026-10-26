@@ -14,7 +14,7 @@ npm run build    # bouwt de site naar _site/
 
 ## Online
 
-De site draait op de Hetzner-server als Docker-container. Een push naar `main` is genoeg: GitHub Actions bouwt de site ter controle en zet hem dan op de server online. Met de hand kan ook, met `./deploy/update.sh` op de server. Zie `docs/online-zetten.md`.
+De site draait op de Hetzner-server als Docker-container. Een push naar `main` is genoeg: GitHub Actions draait de tests en is dat groen, dan zet de server de nieuwe versie zelf online. Met de hand kan ook, met `./deploy/update.sh` op de server. Zie `docs/online-zetten.md`.
 
 ## Zoeken
 
@@ -138,7 +138,8 @@ docs/nieuwsbrief.md       Listmonk: installeren, Substack-overstap, beheer
 docs/radar.md             de wekelijkse regelgevingsradar
 Dockerfile, docker/       de container die de site bouwt en serveert
 deploy/update.sh          nieuwe versie live zetten (op de server)
-.github/workflows/        online zetten na elke push naar main
+.github/workflows/        tests bij elke push en pull request
+test/                     basistests op de gebouwde site (npm test)
 listmonk/                 Docker-opzet voor Listmonk
 radar/                    regelgevingsradar (Miniflux → Claude → overzicht)
 scripts/                  hulpscripts, zoals de Substack-import
