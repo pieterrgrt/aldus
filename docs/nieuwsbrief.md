@@ -1,6 +1,6 @@
 # Nieuwsbrief met Listmonk
 
-De nieuwsbrief gaat via [Listmonk](https://listmonk.app) op de eigen Hetzner-server, op **nieuwsbrief.alduslab.eu**. Listmonk draait in Docker naast Nextcloud en Vaultwarden, met een eigen Postgres-database. Het aanmeldformulier op alduslab.eu stuurt rechtstreeks naar Listmonk.
+De nieuwsbrief gaat via [Listmonk](https://listmonk.app) op de eigen Contabo-server, op **nieuwsbrief.alduslab.eu**. Listmonk draait in Docker naast Nextcloud en Vaultwarden, met een eigen Postgres-database. Het aanmeldformulier op alduslab.eu stuurt rechtstreeks naar Listmonk.
 
 | Wat | Waarde |
 | --- | --- |

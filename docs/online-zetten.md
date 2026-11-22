@@ -1,6 +1,6 @@
 # Aldus online zetten op alduslab.eu
 
-Aldus draait op de Hetzner-server, net als liveaux: in een eigen Docker-container op een interne poort, met de nginx van de server ervoor voor het domein en HTTPS. Het verschil met liveaux: Aldus is een statische site. Er is geen database, geen `.env` en geen admin. De container bouwt de site met Eleventy en serveert de bestanden met nginx.
+Aldus draait op de Contabo-server (45.8.133.138, map `/home/claude/aldus`), net als liveaux: in een eigen Docker-container op een interne poort, met de nginx van de server ervoor voor het domein en HTTPS. Het verschil met liveaux: Aldus is een statische site. Er is geen database, geen `.env` en geen admin. De container bouwt de site met Eleventy en serveert de bestanden met nginx.
 
 | Website | Domein | Interne poort | Map op de server | Repository |
 | --- | --- | --- | --- | --- |
@@ -138,6 +138,14 @@ Een back-up is niet nodig. Alles staat in de repository en de server bouwt de si
 De server zet elke nieuwe commit op `main` zelf online, zodra de workflow *Tests* (`.github/workflows/test.yml`) op GitHub groen is. Binnen ongeveer vijf minuten draait de nieuwe versie; daarna controleert de server `https://alduslab.eu/health`. Mislukken de tests, dan blijft de oude versie gewoon online.
 
 De workflow bouwt de site, draait `npm test` (de tests in `test/`) en bouwt daarnaast de Docker-container om te kijken of nginx `/health` en de homepage met 200 serveert. Je ziet elke ronde onder *Actions* op GitHub. Lokaal: `npm run controleer`.
+
+Dat doet `/usr/local/bin/autodeploy` op de server, elke vijf minuten (systemd-timer `autodeploy.timer`). Aldus staat daarvoor in `/etc/autodeploy.conf`:
+
+```
+aldus|/home/claude/aldus|pieterrgrt/aldus|http://127.0.0.1:8003/health
+```
+
+Staat er een `#` voor die regel, dan gebeurt er niets na een push. Wat de autodeploy deed, staat in `/var/log/autodeploy.log`.
 
 Wijzigingen aan `docker-compose.yml` en `Dockerfile` gaan niet automatisch mee; die zet je met de hand online met `./deploy/update.sh` op de server.
 
