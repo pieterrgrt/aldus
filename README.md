@@ -14,7 +14,7 @@ npm run build    # bouwt de site naar _site/
 
 ## Online
 
-De site draait op de Hetzner-server als Docker-container. Een push naar `main` is genoeg: GitHub Actions draait de tests en is dat groen, dan zet de server de nieuwe versie zelf online. Met de hand kan ook, met `./deploy/update.sh` op de server. Zie `docs/online-zetten.md`.
+De site draait op de Contabo-server als Docker-container. Een push naar `main` is genoeg: GitHub Actions draait de tests en is dat groen, dan zet de server de nieuwe versie zelf online. Met de hand kan ook, met `./deploy/update.sh` op de server. Zie `docs/online-zetten.md`.
 
 ## Zoeken
 
