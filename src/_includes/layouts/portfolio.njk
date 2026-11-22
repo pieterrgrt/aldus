@@ -1,0 +1,26 @@
+---
+layout: layouts/base.njk
+---
+<section class="intro">
+  <h1>{{ portfolio.titel }}</h1>
+  <p class="lead">{{ portfolio.intro }}</p>
+</section>
+
+{% for groep in portfolio.groepen %}
+<section aria-labelledby="groep-{{ loop.index }}">
+  <h2 id="groep-{{ loop.index }}" class="sectiekop">{{ groep.titel }}</h2>
+  {% if groep.tekst %}<p>{{ groep.tekst }}</p>{% endif %}
+  <ol class="lijst portfolio">
+  {% for site in groep.sites %}
+    <li>
+      {% if site.url %}<a href="{{ site.url }}">{{ site.naam }}</a>{% else %}<span class="naam">{{ site.naam }}</span>{% endif %}{% if site.status %} <span class="label">{{ site.status }}</span>{% endif %}
+      <p class="projectregel">{% if site.url %}{{ site.url | replace("https://", "") }} · {% endif %}{{ site.soort }}</p>
+      <p>{{ site.tekst }}</p>
+      <p class="techniek">{{ site.techniek }}</p>
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+{% endfor %}
+
+{% include "partials/contact.njk" %}

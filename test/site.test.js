@@ -16,12 +16,14 @@ const routes = [
   "zoeken/index.html",
   "winkel/index.html",
   "consultancy/index.html",
+  "portfolio/index.html",
   "404.html",
   "en/index.html",
   "en/articles/index.html",
   "en/search/index.html",
   "en/shop/index.html",
   "en/consulting/index.html",
+  "en/portfolio/index.html",
   "en/404.html",
 ];
 
