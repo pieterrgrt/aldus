@@ -90,9 +90,13 @@ betaallink: "https://…"
 
 `volgorde` bepaalt de volgorde op de overzichtspagina. De knop *Bestellen* gaat naar de `betaallink` (bijvoorbeeld een betaallink van Mollie, Stripe of Gumroad; die regelen ook btw en de download). Zonder betaallink wordt het een knop om per mail te bestellen, als `email` in `src/_data/winkel.js` staat. De winkel staat aan (`klaar: true` in `src/_data/winkel.js`); een los product verberg je met `concept: true`, zoals nu het instructiepakket.
 
+## Portfolio
+
+`/portfolio/` (en `/en/portfolio/`) toont de sites en apps die ik heb gebouwd, in twee groepen: *Op het web* en *Eigen gereedschap*. Alles staat in `src/_data/portfolio.js`: per site de naam, eventueel een `url` (zonder url geen link, zoals bij apps achter een inlog), de techniek, en per taal de soort, een korte tekst en eventueel een `status`-label (*Demo*, *Nog niet online*). De volgorde in het bestand is de volgorde op de pagina. Onderaan staat het contactblok van de consultancy.
+
 ## Engelse versie
 
-De hele site bestaat ook in het Engels, onder `/en/`: homepage, stukken (`/en/articles/`), zoeken (`/en/search/`), consultancy (`/en/consulting/`), winkel (`/en/shop/`) en nieuwsbrief (`/en/newsletter/`). Rechtsboven in elke pagina staat een link naar dezelfde pagina in de andere taal; bestaat die nog niet, dan gaat de link naar de homepage.
+De hele site bestaat ook in het Engels, onder `/en/`: homepage, stukken (`/en/articles/`), zoeken (`/en/search/`), consultancy (`/en/consulting/`), portfolio (`/en/portfolio/`), winkel (`/en/shop/`) en nieuwsbrief (`/en/newsletter/`). Rechtsboven in elke pagina staat een link naar dezelfde pagina in de andere taal; bestaat die nog niet, dan gaat de link naar de homepage.
 
 - **Een stuk vertalen.** Zet de vertaling in `src/en/stukken/` met **dezelfde bestandsnaam** als het Nederlandse stuk; zo weet de site welke twee bij elkaar horen. Het Engelse adres kies je met `slug`:
 
@@ -126,6 +130,7 @@ src/
   winkel/*.md             de producten in de winkel
   _data/consultancy.js    introductie, soorten werk, contact, aan/uit
   _data/winkel.js         introductie winkel, bestel-e-mail, disclaimer, aan/uit
+  _data/portfolio.js      de sites en apps op /portfolio/
   _data/nieuwsbrief.js    adres van Listmonk, lijst-UUID, tekst bij het formulier
   _includes/partials/     aanmeldformulier, contactblok
   index.njk               homepage

@@ -6,6 +6,7 @@ import site from "./site.js";
 import consultancy from "./consultancy.js";
 import nieuwsbrief from "./nieuwsbrief.js";
 import winkel from "./winkel.js";
+import portfolio from "./portfolio.js";
 
 export default {
   t: (data) => teksten[data.taal],
@@ -13,4 +14,5 @@ export default {
   consultancy: (data) => inTaal(consultancy, data.taal),
   nieuwsbrief: (data) => inTaal(nieuwsbrief, data.taal),
   winkel: (data) => inTaal(winkel, data.taal),
+  portfolio: (data) => inTaal(portfolio, data.taal),
 };

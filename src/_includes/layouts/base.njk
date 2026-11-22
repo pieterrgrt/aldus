@@ -24,6 +24,7 @@
     <nav aria-label="{{ t.hoofdmenu }}">
       <a href="{{ t.url.zoeken }}"{% if page.url == t.url.zoeken %} aria-current="page"{% endif %}>{{ t.zoeken }}</a>
       <a href="{{ t.url.stukken }}"{% if page.url == t.url.stukken %} aria-current="page"{% endif %}>{{ t.alleStukken }}</a>
+      <a href="{{ t.url.portfolio }}"{% if onderdeel == "portfolio" %} aria-current="page"{% endif %}>{{ portfolio.titel }}</a>
       {% if consultancy.klaar or eleventy.env.runMode != "build" %}<a href="{{ t.url.consultancy }}"{% if onderdeel == "consultancy" %} aria-current="page"{% endif %}>{{ consultancy.titel }}</a>{% endif %}
       {% if winkel.klaar or eleventy.env.runMode != "build" %}<a href="{{ t.url.winkel }}"{% if onderdeel == "winkel" %} aria-current="page"{% endif %}>{{ winkel.titel }}</a>{% endif %}
       {% if nieuwsbrief.lijst or eleventy.env.runMode != "build" %}<a href="{{ t.url.nieuwsbrief }}"{% if onderdeel == "nieuwsbrief" %} aria-current="page"{% endif %}>{{ t.nieuwsbrief }}</a>{% endif %}
